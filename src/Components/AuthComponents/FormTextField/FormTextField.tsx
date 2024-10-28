@@ -6,7 +6,7 @@ interface FormTextFieldType {
   placeholder?: string;
   errors: any;
   name: string;
-  register: UseFormRegister<FieldValues>;
+  register?: UseFormRegister<FieldValues>;
   rules?: RegisterOptions;
   icon?: ReactNode;
   type?: string;
