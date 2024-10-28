@@ -8,6 +8,7 @@ import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm
 import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTextField/PasswordTextField";
 import { Link } from "react-router-dom";
 import GoogleSignInButton from "../../../Components/AuthComponents/GoogleSignInButton/GoogleSignInButton";
+import AuthHeader from "../../../Components/AuthComponents/AuthHeader/AuthHeader";
 
 export default function Login() {
   const {
@@ -34,28 +35,7 @@ export default function Login() {
         gap: "30px",
       }}
     >
-      <Box sx={{ textAlign: "center" }} component={"div"}>
-        <img src={logo} alt="Logo" />
-        <Typography
-          variant="h4"
-          component="h2"
-          sx={{
-            fontFamily: "Lexend, sans-serif",
-            fontWeight: "600",
-            fontSize: "2rem",
-            mt: "10px",
-          }}
-        >
-          Welcome 👋
-        </Typography>
-        <Typography
-          variant="body1"
-          component="p"
-          sx={{ fontWeight: "300", mt: "10px", color: "#A2A1A8" }}
-        >
-          Please login here
-        </Typography>
-      </Box>
+      <AuthHeader title=" Welcome 👋" subTitle="Please login here" />
 
       <FormControl
         component={"form"}
