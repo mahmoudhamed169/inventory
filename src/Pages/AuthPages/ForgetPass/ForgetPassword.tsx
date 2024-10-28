@@ -31,12 +31,12 @@ export default function ForgetPassword() {
             cursor: "pointer",
             transform: "translateX(-7px)",
           }}
+          onClick={() => navigate(-1)}
         >
           <ChevronLeftIcon style={{ fontWeight: 300 }} />
           <Typography
             sx={{ fontWeight: 300, fontFamily: "Lexend, sans-serif" }}
             variant="body1"
-            onClick={() => navigate(-1)}
           >
             Back
           </Typography>
