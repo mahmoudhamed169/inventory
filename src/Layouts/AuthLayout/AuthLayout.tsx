@@ -32,7 +32,7 @@ export default function AuthLayout() {
               md: "100%",
             },
             display: "flex",
-            justifyContent: "center",
+            // justifyContent: "center",
             alignItems: "center",
 
             mx: "auto",
