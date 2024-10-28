@@ -8,7 +8,7 @@ export default function GoogleIcones() {
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g clip-path="url(#clip0_13359_3232)">
+        <g clipPath="url(#clip0_13359_3232)">
           <path
             d="M24.266 12.2764C24.266 11.4607 24.1999 10.6406 24.0588 9.83807H12.74V14.4591H19.2217C18.9528 15.9494 18.0885 17.2678 16.823 18.1056V21.1039H20.69C22.9608 19.0139 24.266 15.9274 24.266 12.2764Z"
             fill="#4285F4"
