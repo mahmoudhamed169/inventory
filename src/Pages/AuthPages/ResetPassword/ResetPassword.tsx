@@ -1,4 +1,10 @@
-import { Box, FormControl, FormHelperText, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  FormControl,
+  FormHelperText,
+  Stack,
+  Typography,
+} from "@mui/material";
 import { MuiOtpInput } from "mui-one-time-password-input";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import React from "react";
@@ -10,8 +16,8 @@ export default function ResetPassword() {
   const [otp, setOtp] = React.useState("");
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      otp: ""
-    }
+      otp: "",
+    },
   });
   const onSubmit = (data) => {
     alert(JSON.stringify(data));
@@ -23,9 +29,7 @@ export default function ResetPassword() {
     <>
       <Stack
         sx={{
-          width: "75%",
-          display: "flex",
-          justifyContent: "start",
+          width: "90%",
           fontFamily: "Lexend, sans-serif",
         }}
         spacing={3}
@@ -40,7 +44,6 @@ export default function ResetPassword() {
             color: "rgba(22, 21, 28, 1)",
           }}
         >
-          {" "}
           <ArrowBackIosIcon sx={{ fontSize: "16px" }} />
           <Typography variant="body1" component="span">
             Back
@@ -65,32 +68,45 @@ export default function ResetPassword() {
               color: "rgba(162, 161, 168, 1)",
             }}
           >
-            {/*  */}
             We have share a code of your registered email address
             mathew.west@ienetworksolutions.com
           </Typography>
         </Box>
-        < FormControl  component={"form"} onSubmit={handleSubmit(onSubmit)} sx={{ width: "100%"    }}>
+        <FormControl
+          component={"form"}
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ width: "100%" }}
+        >
           <Stack spacing={3}>
-          <Controller
-        name="otp"
-        control={control}
-        rules={{ validate: (value) => value.length === 6 }}
-        render={({ field, fieldState }) => (
-          <Box>
-            <MuiOtpInput  sx={{ gap: 1, }} {...field} length={6} />
-            {fieldState.invalid ? (
-              <FormHelperText sx={{mt:1}} error>OTP invalid</FormHelperText>
-            ) : null}
-          </Box>
-        )}
-      />
+            <Controller
+              name="otp"
+              control={control}
+              rules={{ validate: (value) => value.length === 6 }}
+              render={({ field, fieldState }) => (
+                <Box>
+                  <MuiOtpInput
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        width: "60px",
+                      },
 
+                      gap: "20px",
+                    }}
+                    {...field}
+                    length={6}
+                  />
+                  {fieldState.invalid ? (
+                    <FormHelperText sx={{ mt: 1 }} error>
+                      OTP invalid
+                    </FormHelperText>
+                  ) : null}
+                </Box>
+              )}
+            />
 
-          <ButtonForm name="Verify" isSubmitting={false}  />
+            <ButtonForm name="Verify" isSubmitting={false} />
           </Stack>
-          </FormControl> 
- 
+        </FormControl>
       </Stack>
     </>
   );
