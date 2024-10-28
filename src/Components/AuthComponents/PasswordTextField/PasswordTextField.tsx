@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { InputAdornment, TextField, IconButton } from "@mui/material";
-import { Visibility, VisibilityOff } from "@mui/icons-material";
+import { EyeOff, Eye } from "lucide-react";
 import { FieldValues, RegisterOptions, UseFormRegister } from "react-hook-form";
 
 interface PasswordTextFieldProps {
@@ -44,7 +44,7 @@ export function PasswordTextField({
               onMouseUp={(e) => e.preventDefault()}
               onMouseDown={(e) => e.preventDefault()}
             >
-              {showPassword ? <VisibilityOff /> : <Visibility />}
+              {showPassword ? <EyeOff /> : <Eye />}
             </IconButton>
           </InputAdornment>
         ),
