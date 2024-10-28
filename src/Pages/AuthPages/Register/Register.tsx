@@ -133,10 +133,9 @@ export default function Register() {
             variant="body1"
             component="p"
             sx={{
-              fontWeight: "300",
+              fontWeight: "400",
               mt: "0.5rem",
               color: "#667085",
-              fontSize: "0.875rem",
             }}
           >
             Already have an account?
