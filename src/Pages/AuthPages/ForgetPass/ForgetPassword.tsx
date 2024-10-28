@@ -27,7 +27,8 @@ export default function ForgetPassword() {
       >
         <Box sx={{display:"flex" ,cursor:"pointer",transform:"translateX(-7px)"}}>
           <ChevronLeftIcon style={{fontWeight:300}} />
-          <Typography sx={{fontWeight:300,fontFamily: "Lexend, sans-serif",}} variant="body1" onClick={()=>navigate(-1)}>
+          <Typography sx={{fontWeight:300,fontFamily: "Lexend, sans-serif",}}
+           variant="body1" onClick={()=>navigate(-1)}>
             Back
           </Typography>
         </Box>
