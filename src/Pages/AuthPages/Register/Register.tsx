@@ -9,7 +9,8 @@ import logo from "../../../assets/Logo.png";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonIcon from "@mui/icons-material/Person";
 import { Link } from "react-router-dom";
-import Styles from "./Register.module.css"
+import Styles from "./Register.module.css";
+import AuthHeader from "../../../Components/AuthComponents/AuthHeader/AuthHeader";
 
 export default function Register() {
   const {
@@ -42,23 +43,11 @@ export default function Register() {
         }}
       >
         {/*  ------------------ Logo and heading section  ------------------ */}
-        <Box sx={{ textAlign: "center" }} component={"div"}>
-          <img src={logo} alt="Logo-register" />
-          <Typography
-            variant="h4"
-            component="h2"
-            sx={{ fontWeight: "600", fontSize: "2rem", mt: "10px" }}
-          >
-            Create an account
-          </Typography>
-          <Typography
-            variant="body1"
-            component="p"
-            sx={{ fontWeight: "300", mt: "10px", color: "#A2A1A8" }}
-          >
-            Start your 30-day free trial.
-          </Typography>
-        </Box>
+
+        <AuthHeader
+          title={"Create an account"}
+          subTitle={"Start your 30-day free trial."}
+        />
 
         {/*  ------------------ Form container  ------------------ */}
         <FormControl
@@ -139,10 +128,7 @@ export default function Register() {
             }}
           >
             Already have an account?
-            <Link
-              to="/login"
-            className={Styles["login-link"]}
-            >
+            <Link to="/login" className={Styles["login-link"]}>
               Login
             </Link>
           </Typography>
