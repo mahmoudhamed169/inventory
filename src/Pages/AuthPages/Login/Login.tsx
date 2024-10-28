@@ -1,4 +1,4 @@
-import { Box, FormControl, Stack, Typography } from "@mui/material";
+import { Box, Checkbox, FormControl, Stack, Typography } from "@mui/material";
 import logo from "../../../assets/Logo.png";
 import { useForm } from "react-hook-form";
 import { useEffect } from "react";
@@ -6,6 +6,8 @@ import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
 import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
 import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTextField/PasswordTextField";
+import { Link } from "react-router-dom";
+import GoogleSignInButton from "../../../Components/AuthComponents/GoogleSignInButton/GoogleSignInButton";
 
 export default function Login() {
   const {
@@ -37,7 +39,12 @@ export default function Login() {
         <Typography
           variant="h4"
           component="h2"
-          sx={{ fontWeight: "600", fontSize: "2rem", mt: "10px" }}
+          sx={{
+            fontFamily: "Lexend, sans-serif",
+            fontWeight: "600",
+            fontSize: "2rem",
+            mt: "10px",
+          }}
         >
           Welcome 👋
         </Typography>
@@ -53,7 +60,7 @@ export default function Login() {
       <FormControl
         component={"form"}
         onSubmit={handleSubmit(onSubmit)}
-        sx={{ width: "100" }}
+        sx={{ width: "90%", mx: "auto" }}
       >
         <Stack spacing={3}>
           <Box>
@@ -86,9 +93,74 @@ export default function Login() {
             />
           </Box>
 
+          <Box>
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              justifyContent={"space-between"}
+              spacing={5}
+            >
+              <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <Checkbox sx={{ width: "24px", height: "24px" }} />
+                <Typography
+                  component={"p"}
+                  variant="body1"
+                  sx={{
+                    fontFamily: "Lexend, sans-serif",
+                    color: "#16151C",
+                    fontWeightL: "300",
+                  }}
+                >
+                  Remember Me
+                </Typography>
+              </Box>
+              <Box>
+                <Link
+                  to={"/forget-password"}
+                  style={{
+                    color: "#006EC4",
+                    textDecoration: "none",
+                    fontFamily: "Lexend, sans-serif",
+                  }}
+                >
+                  Forgot Password?
+                </Link>
+              </Box>
+            </Stack>
+          </Box>
+
           <ButtonForm name="Login" isSubmitting={isSubmitting} />
+          <GoogleSignInButton isSubmitting={isSubmitting} />
         </Stack>
       </FormControl>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "5px",
+          alignItems: "center",
+        }}
+        component={"div"}
+      >
+        <Typography
+          variant="body1"
+          component="p"
+          sx={{ fontWeight: "300", color: "#A2A1A8" }}
+        >
+          Don’t have an account?
+        </Typography>
+        <Link
+          to={"/register"}
+          style={{
+            textDecoration: "none",
+            color: "#1366D9",
+            fontWeight: "300",
+            fontFamily: "Lexend, sans-serif",
+          }}
+        >
+          Sign up
+        </Link>
+      </Box>
     </Box>
   );
 }
