@@ -1,4 +1,4 @@
-import { Box, FormControl, Link, Stack, Typography } from "@mui/material";
+import { Box, FormControl, Stack, Typography } from "@mui/material";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
@@ -8,6 +8,8 @@ import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTe
 import logo from "../../../assets/Logo.png";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonIcon from "@mui/icons-material/Person";
+import { Link } from "react-router-dom";
+import Styles from "./Register.module.css";
 import AuthHeader from "../../../Components/AuthComponents/AuthHeader/AuthHeader";
 
 export default function Register() {
@@ -120,19 +122,13 @@ export default function Register() {
             variant="body1"
             component="p"
             sx={{
-              fontWeight: "300",
+              fontWeight: "400",
               mt: "0.5rem",
-              color: " #667085",
-              fontSize: "0.875rem",
+              color: "#667085",
             }}
           >
             Already have an account?
-            <Link
-              sx={{ color: "#0F50AA", marginLeft: "0.4rem", fontWeight: "500" }}
-              underline="hover"
-              component="a"
-              href="login"
-            >
+            <Link to="/login" className={Styles["login-link"]}>
               Login
             </Link>
           </Typography>
