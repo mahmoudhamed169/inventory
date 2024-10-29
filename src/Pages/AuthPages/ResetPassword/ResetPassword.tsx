@@ -14,6 +14,10 @@ import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm
 import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTextField/PasswordTextField";
+import {
+  emailValidationRules,
+  PasswordValidation,
+} from "../../../Validations/Validations";
 
 export default function ResetPassword() {
   const [otp, setOtp] = React.useState("");
@@ -23,6 +27,7 @@ export default function ResetPassword() {
     handleSubmit,
     setFocus,
     formState: { errors, isSubmitting },
+    watch,
   } = useForm({
     defaultValues: {
       otp: "",
@@ -91,13 +96,7 @@ export default function ResetPassword() {
               placeholder="Enter your email"
               register={register}
               errors={errors.email}
-              rules={{
-                required: "Email is required",
-                pattern: {
-                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                  message: "Invalid email address",
-                },
-              }}
+              rules={emailValidationRules}
               label="Email"
               type="email"
               icon={<AlternateEmailIcon />}
@@ -109,16 +108,20 @@ export default function ResetPassword() {
               placeholder="Enter your password"
               errors={errors.password}
               register={register}
-              rules={{ required: "Password is required" }}
+              rules={PasswordValidation(8)}
             />
 
             <PasswordTextField
               label="Confirm Password"
-              name="password"
-              placeholder="Enter your password"
-              errors={errors.password}
+              name="confirmPassword"
+              placeholder="Confirm your password"
+              errors={errors.confirmPassword}
               register={register}
-              rules={{ required: "Password is required" }}
+              rules={{
+                required: "Confirm password is required",
+                validate: (value) =>
+                  value === watch("password") || "Passwords do not match",
+              }}
             />
 
             <Controller
