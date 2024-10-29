@@ -5,6 +5,8 @@ import Register from "./Pages/AuthPages/Register/Register";
 import ForgetPassword from "./Pages/AuthPages/ForgetPass/ForgetPassword";
 import ResetPassword from "./Pages/AuthPages/ResetPassword/ResetPassword";
 import { Toaster } from "react-hot-toast";
+import MasterLayout from "./Layouts/MasterLayout/MasterLayout";
+import Dashboard from "./Pages/MasterPages/Dashboard/Dashboard";
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -18,6 +20,14 @@ export default function App() {
         { path: "register", element: <Register /> },
         { path: "forget-password", element: <ForgetPassword /> },
         { path: "reset-password", element: <ResetPassword /> },
+      ],
+    },
+    {
+      path: "/hame",
+      element: <MasterLayout />,
+      children: [
+        { index: true, element: <Dashboard /> },
+        { path: "dashboard", element: <Dashboard /> },
       ],
     },
   ]);

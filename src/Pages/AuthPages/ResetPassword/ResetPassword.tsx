@@ -8,7 +8,7 @@ import {
 import { MuiOtpInput } from "mui-one-time-password-input";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import React from "react";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
 import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
 import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
@@ -20,7 +20,6 @@ import {
 } from "../../../Validations/Validations";
 
 export default function ResetPassword() {
-  const [otp, setOtp] = React.useState("");
   const {
     control,
     register,
@@ -30,14 +29,30 @@ export default function ResetPassword() {
     watch,
   } = useForm({
     defaultValues: {
-      otp: "",
+      newPassword: "",
+      confirmPassword: "",
+      email: "",
+      otpCode: "",
     },
   });
-  const onSubmit = (data) => {
-    alert(JSON.stringify(data));
-  };
-  const handleChange = (newValue) => {
-    setOtp(newValue);
+  const onSubmit: SubmitHandler<ResetRequest> = async (data) => {
+    console.log(data);
+    // const toastId = toast.loading("Processing...");
+    // try {
+    //   const response = await axios.post<LoginResponse>(
+    //     AUTHENTICATION_URLS.login,
+    //     data
+    //   );
+
+    //   toast.success("Login Successfully", {
+    //     id: toastId,
+    //   });
+    // } catch (error) {
+    //   const axiosError = error as AxiosError<{ message: string }>;
+    //   toast.error(axiosError.response?.data?.message || "An error occurred", {
+    //     id: toastId,
+    //   });
+    // }
   };
   return (
     <>
@@ -103,8 +118,8 @@ export default function ResetPassword() {
             />
 
             <PasswordTextField
-              label="Password"
-              name="password"
+              label="New Password"
+              name="newPassword"
               placeholder="Enter your password"
               errors={errors.password}
               register={register}
@@ -125,7 +140,7 @@ export default function ResetPassword() {
             />
 
             <Controller
-              name="otp"
+              name="otpCode"
               control={control}
               rules={{
                 validate: (value) =>
@@ -142,7 +157,6 @@ export default function ResetPassword() {
                     }}
                     {...field}
                     length={6}
-                    onChange={handleChange}
                   />
                   {fieldState.invalid && (
                     <FormHelperText sx={{ mt: 1 }} error>

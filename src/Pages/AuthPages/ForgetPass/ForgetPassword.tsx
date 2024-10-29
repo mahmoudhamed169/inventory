@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, Typography } from "@mui/material";
+import { Box, Button, FormControl, Stack, Typography } from "@mui/material";
 
 import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
 import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
@@ -13,7 +13,7 @@ export default function ForgetPassword() {
     register,
     handleSubmit,
     formState: { errors, isSubmitting },
-  } = useForm({ mode: "onChange" });
+  } = useForm();
   let onSubmit = async (data) => {
     try {
       // let response = await axios.post(,data)
@@ -22,9 +22,7 @@ export default function ForgetPassword() {
   };
   return (
     <>
-      <Box
-        sx={{ w: "90%", display: "flex", flexDirection: "column", margin: 2 }}
-      >
+      <Stack sx={{ w: "90%" }} spacing={3}>
         <Box
           sx={{
             display: "flex",
@@ -48,7 +46,6 @@ export default function ForgetPassword() {
               fontWeight: 600,
               fontSize: "30px",
               fontFamily: "Lexend, sans-serif",
-              my: 2,
             }}
           >
             Forgot Password
@@ -66,30 +63,32 @@ export default function ForgetPassword() {
           </Typography>
         </Box>
 
-        <Box>
-          <FormControl onSubmit={handleSubmit(onSubmit)} sx={{ width: "100%" }}>
-            <Box sx={{ my: 4 }}>
-              <FormTextField
-                placeholder="Enter Your Email"
-                register={register}
-                name="email"
-                type="email"
-                errors={errors.email}
-                label="Email"
-                rules={{
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                    message: "Invalid email address",
-                  },
-                }}
-              />
-            </Box>
+        <FormControl
+          component={"form"}
+          onSubmit={handleSubmit(onSubmit)}
+          sx={{ width: "100%" }}
+        >
+          <Stack spacing={3}>
+            <FormTextField
+              placeholder="Enter Your Email"
+              register={register}
+              name="email"
+              type="email"
+              errors={errors.email}
+              label="Email"
+              rules={{
+                required: "Email is required",
+                pattern: {
+                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
+                  message: "Invalid email address",
+                },
+              }}
+            />
 
             <ButtonForm name="Send OTP" isSubmitting={isSubmitting} />
-          </FormControl>
-        </Box>
-      </Box>
+          </Stack>
+        </FormControl>
+      </Stack>
     </>
   );
 }
