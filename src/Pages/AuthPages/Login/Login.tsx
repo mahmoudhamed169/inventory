@@ -1,6 +1,6 @@
 import { Box, Checkbox, FormControl, Stack, Typography } from "@mui/material";
 import logo from "../../../assets/Logo.png";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useEffect } from "react";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
@@ -8,6 +8,11 @@ import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm
 import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTextField/PasswordTextField";
 import { Link } from "react-router-dom";
 import GoogleSignInButton from "../../../Components/AuthComponents/GoogleSignInButton/GoogleSignInButton";
+import AuthHeader from "../../../Components/AuthComponents/AuthHeader/AuthHeader";
+import toast from "react-hot-toast";
+import axios, { AxiosError } from "axios";
+import { LoginRequest, LoginResponse } from "../../../Interfaces/Interfaces";
+import { AUTHENTICATION_URLS } from "../../../Api/EndPoints";
 
 export default function Login() {
   const {
@@ -21,8 +26,24 @@ export default function Login() {
     setFocus("email");
   }, [setFocus]);
 
-  const onSubmit = (data) => {
+  const onSubmit: SubmitHandler<LoginRequest> = async (data) => {
     console.log(data);
+    // const toastId = toast.loading("Processing...");
+    // try {
+    //   const response = await axios.post<LoginResponse>(
+    //     AUTHENTICATION_URLS.login,
+    //     data
+    //   );
+
+    //   toast.success("Login Successfully", {
+    //     id: toastId,
+    //   });
+    // } catch (error) {
+    //   const axiosError = error as AxiosError<{ message: string }>;
+    //   toast.error(axiosError.response?.data?.message || "An error occurred", {
+    //     id: toastId,
+    //   });
+    // }
   };
 
   return (
@@ -34,28 +55,7 @@ export default function Login() {
         gap: "30px",
       }}
     >
-      <Box sx={{ textAlign: "center" }} component={"div"}>
-        <img src={logo} alt="Logo" />
-        <Typography
-          variant="h4"
-          component="h2"
-          sx={{
-            fontFamily: "Lexend, sans-serif",
-            fontWeight: "600",
-            fontSize: "2rem",
-            mt: "10px",
-          }}
-        >
-          Welcome 👋
-        </Typography>
-        <Typography
-          variant="body1"
-          component="p"
-          sx={{ fontWeight: "300", mt: "10px", color: "#A2A1A8" }}
-        >
-          Please login here
-        </Typography>
-      </Box>
+      <AuthHeader title=" Welcome 👋" subTitle="Please login here" />
 
       <FormControl
         component={"form"}
