@@ -23,7 +23,7 @@ export default function App() {
       ],
     },
     {
-      path: "home",
+      path:"home",
       element: <MasterLayout />,
       children: [
         { index: true, element: <Dashboard /> },
