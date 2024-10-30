@@ -35,12 +35,12 @@ const chartProps = {
   series: [
     {
       label: "Ordered",
-      data: data.map((v) => v.y1),
+      data: data.slice(0, 12).map((v) => v.y1),
       color: " #DBA362",
     },
     {
       label: "Delivered",
-      data: data.map((v) => v.y2),
+      data: data.slice(0, 12).map((v) => v.y2),
       color: " #B6D3FA",
     },
   ],
@@ -50,19 +50,14 @@ export default function ZoomControlled() {
   const xAxisConfig = [
     {
       zoom: true,
-      scaleType: "point" as const, 
+      scaleType: "point" as const,
       id: "my-x-axis",
       data: [
-        "Jun",
+        "Jan",
         "Feb",
         "Mar",
-        "Api",
+        "Apr",
         "May",
-        "Jun",
-        "Feb",
-        "Mar",
-        "Api",
-        "May5",
         "Jun",
         "Jul",
         "Aug",
@@ -70,15 +65,6 @@ export default function ZoomControlled() {
         "Oct",
         "Nov",
         "Dec",
-        "Label 15",
-        "Label 16",
-        "Label 17",
-        "Label 18",
-        "Label 19",
-        "Label 20",
-        "Label 21",
-        "Label 22",
-        "Label 23",
       ],
     },
   ];
@@ -87,7 +73,7 @@ export default function ZoomControlled() {
     {
       axisId: "my-x-axis",
       start: 0,
-      end: 20,
+      end: 40,
     },
   ]);
 
@@ -96,6 +82,7 @@ export default function ZoomControlled() {
       <Typography
         sx={{
           fontWeight: 500,
+          fontFamily:"Inter, serif",
           fontSize: "20px",
           color: "#383E49",
           pt: 2,
@@ -109,7 +96,11 @@ export default function ZoomControlled() {
         zoom={zoom}
         onZoomChange={setZoom}
         xAxis={xAxisConfig}
+
+       
       />
+
+
     </Box>
   );
 }

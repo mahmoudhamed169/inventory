@@ -17,30 +17,35 @@ export default function SummaryComponents() {
         <InventoryAndProductContent
           header="Inventory Summary "
           imgLeft={firstInvImg}
-          numberLeft=""
+          numberLeft="300"
           titleLeft="Quantity in Hand"
           imgRight={secInvImg}
-          numberRight=""
+          numberRight="200"
           titleRight="To be received"
         />
         {/* Product */}
         <InventoryAndProductContent
           header="Product Summary"
           imgLeft={firstImgPro}
-          numberLeft=""
+          numberLeft="852"
           titleLeft="Number of Suppliers"
           imgRight={secImgPro}
-          numberRight=""
+          numberRight="321"
           titleRight="Number of Categories"
         />
         <Chart />
 
-        {/* stock */}
+        {/* Stock */}
         <Box sx={{ bgcolor: "white", borderRadius: "8px", p: 2, w: "100%" }}>
           <Box>
             <Box sx={{ display: "flex", mb: 2 }}>
               <Typography
-                sx={{ fontWeight: 500, fontSize: "20px", color: "#383E49" }}
+                sx={{
+                 fontFamily:"Inter, serif",
+                  fontWeight: 500,
+                  fontSize: "20px",
+                  color: "#383E49",
+                }}
               >
                 Low Quantity Stock
               </Typography>
@@ -51,6 +56,9 @@ export default function SummaryComponents() {
                   marginTop: "3%",
                   fontSize: "14px",
                   textDecoration: "none",
+                  fontFamily:"Inter, serif",
+                  color:"#0F50AA"
+                  
                 }}
               >
                 See All
@@ -63,11 +71,21 @@ export default function SummaryComponents() {
                 <Box sx={{ mt: 1 }}>
                   <Typography
                     variant="body1"
-                    sx={{ color: "#383E49", fontWeight: 600 }}
+                    sx={{
+                      color: "#383E49",
+                      fontWeight: 600,
+                     fontFamily:"Inter, serif",
+                    }}
                   >
-                    xx
+                    Chipsy
                   </Typography>
-                  <Typography sx={{ color: "#667085", fontSize: "14px" }}>
+                  <Typography
+                    sx={{
+                      color: "#667085",
+                      fontSize: "14px",
+                     fontFamily:"Inter, serif",
+                    }}
+                  >
                     Remaining Quantity : Packet
                   </Typography>
                 </Box>
@@ -77,6 +95,7 @@ export default function SummaryComponents() {
                     bgcolor: "#FEECEB",
                     color: "#AA3028",
                     fontSize: "12px",
+                   fontFamily:"Inter, serif",
                     borderRadius: "16px",
                     textTransform: "none",
                     height: "22px",

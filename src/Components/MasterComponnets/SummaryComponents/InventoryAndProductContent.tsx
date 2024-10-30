@@ -33,7 +33,12 @@ export default function InventoryAndProductContent({
             }}
           >
             <Typography
-              sx={{ fontWeight: 500, fontSize: "20px", color: "#383E49" }}
+              sx={{
+              fontFamily:"Inter, serif",
+                fontWeight: 500,
+                fontSize: "20px",
+                color: "#383E49",
+              }}
             >
               {header}
             </Typography>
@@ -48,18 +53,23 @@ export default function InventoryAndProductContent({
                   width: "50%",
                 }}
               >
-                <Box component="img" src={imgLeft} sx={{}} />
+                <Box component="img" src={imgLeft} />
                 <Typography
                   variant="body1"
-                  sx={{ fontWeight: 600, color: "#5D6679" }}
+                  sx={{
+                    fontFamily:"Inter, serif",
+                    fontWeight: 600,
+                    color: "#5D6679",
+                  }}
                 >
                   {numberLeft}
                 </Typography>
                 <Typography
                   sx={{
                     fontWeight: 500,
-                    fontSize: "14px",
+                    fontSize: "12px",
                     color: "#444444",
+                    fontFamily:"Inter, serif",
                     pb: 2,
                   }}
                 >
@@ -78,15 +88,20 @@ export default function InventoryAndProductContent({
                 <Box component="img" src={imgRight} sx={{}} />
                 <Typography
                   variant="body1"
-                  sx={{ fontWeight: 600, color: "#5D6679" }}
+                  sx={{
+                    fontFamily:"Inter, serif",
+                    fontWeight: 600,
+                    color: "#5D6679",
+                  }}
                 >
                   {numberRight}
                 </Typography>
                 <Typography
                   sx={{
                     fontWeight: 500,
-                    fontSize: "14px",
+                    fontSize: "12px",
                     color: "#444444",
+                    fontFamily:"Inter, serif",
                     pb: 2,
                   }}
                 >
@@ -95,8 +110,6 @@ export default function InventoryAndProductContent({
               </Stack>
             </Box>
           </Box>
-
-          <Box></Box>
         </Stack>
       </Box>
     </>
