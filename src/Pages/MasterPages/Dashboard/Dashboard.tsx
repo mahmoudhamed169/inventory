@@ -1,5 +1,5 @@
 import { Box, Grid2, Typography } from "@mui/material";
-import SummaryComponents from "../../../Components/MasterComponnets/SalesOverview/SummaryComponents/SummaryComponents";
+import SummaryComponents from "../../../Components/MasterComponnets/SummaryComponents/SummaryComponents";
 
 export default function Dashboard() {
   return (
