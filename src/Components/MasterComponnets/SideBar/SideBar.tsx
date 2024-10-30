@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Typography, useMediaQuery } from "@mui/material";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import InventoryIcone from "../../../Icones/InventoryIcone";
 import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
@@ -10,12 +11,12 @@ import FactCheckIcon from "@mui/icons-material/FactCheck";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LogoIcone from "../../../Icones/LogoIcone";
-import { Typography } from "@mui/material";
 
 export default function SideBar() {
   const navigate = useNavigate();
   const location = useLocation();
   const [isCollapse, setIsCollapse] = useState(true);
+  const isMobile = useMediaQuery("(max-width:768px)");
 
   const getMenuItemClassName = (path: string) => {
     return location.pathname === path
@@ -46,76 +47,70 @@ export default function SideBar() {
         flexDirection: "column",
         justifyContent: "space-between",
         color: "#5D6679",
-        borderRight:" 1px solid #F0F1F3",
-        borderTopRightRadius:"15px",
-        borderBottomRightRadius:"15px",
-        backgroundColor:"#fff"
+        borderRight: "1px solid #F0F1F3",
+        borderTopRightRadius: "15px",
+        borderBottomRightRadius: "15px",
+        backgroundColor: "#fff",
+        width: isMobile ? "65px" : "250px",
+        minWidth: isMobile ? "65px" : "250px",
       }}
       collapsed={isCollapse}
       className="sidebar-container"
     >
       <Menu
         rootStyles={{ height: "85%", overflowY: "hidden" }}
-        menuItemStyles={{
-          button: {
-            [`&.active`]: {
-              backgroundColor: "#13395e",
-              color: "#b6c8d9",
-            },
-          },
-        }}
       >
         <MenuItem
+          component={<Link to="/home/dashboard" />}
+          icon={<LogoIcone />}
           rootStyles={{
             paddingTop: "1.3rem",
             paddingBottom: "2rem",
           }}
-          component={<Link to="/home" />}
-          icon={<LogoIcone />}
         >
           <Typography sx={{ color: "#1570EF" }} variant="h5">
             KANBAN
           </Typography>
         </MenuItem>
         <MenuItem
-          component={<Link to="/home" />}
+          component={<Link to="/home/dashboard" />}
           icon={<HomeOutlinedIcon />}
-          className={getMenuItemClassName("/home")}
+          className={getMenuItemClassName("/home/dashboard")}
         >
-          Dashobard
+          Dashboard
         </MenuItem>
         <MenuItem
-          component={<Link to="/home" />}
+          component={<Link to="/inventory" />}
           icon={<InventoryIcone />}
-          className={getMenuItemClassName("/home/")}
+          className={getMenuItemClassName("/inventory")}
         >
           Inventory
         </MenuItem>
         <MenuItem
-          component={<Link to="/home" />}
+          component={<Link to="/reports" />}
           icon={<BarChartOutlinedIcon />}
-          className={getMenuItemClassName("/home/")}
+          className={getMenuItemClassName("/reports")}
         >
           Reports
         </MenuItem>
         <MenuItem
-          component={<Link to="/home" />}
+          component={<Link to="/suppliers" />}
           icon={<AccountCircleOutlinedIcon />}
-          className={getMenuItemClassName("/home/")}
+          className={getMenuItemClassName("/suppliers")}
         >
           Suppliers
         </MenuItem>
         <MenuItem
-          component={<Link to="/home" />}
+          component={<Link to="/orders" />}
           icon={<Inventory2OutlinedIcon />}
-          className={getMenuItemClassName("/home/")}
+          className={getMenuItemClassName("/orders")}
         >
           Orders
         </MenuItem>
         <MenuItem
-          component={<Link to="/home" />}
+          component={<Link to="/manage-store" />}
           icon={<FactCheckIcon />}
-          className={getMenuItemClassName("/home/")}
+          className={getMenuItemClassName("/manage-store")}
         >
           Manage Store
         </MenuItem>
@@ -123,21 +118,21 @@ export default function SideBar() {
 
       <Menu rootStyles={{ height: "15%" }}>
         <MenuItem
-          component={<Link to="/home" />}
+          component={<Link to="/settings" />}
           icon={<SettingsOutlinedIcon />}
-          className={getMenuItemClassName("/home/")}
+          className={getMenuItemClassName("/settings")}
         >
           Settings
         </MenuItem>
         <MenuItem
-          component={<Link to="/home" />}
+          component={<Link to="/logout" />}
           icon={<LogoutIcon />}
           onClick={() => {
             localStorage.removeItem("token");
             navigate("/login");
           }}
         >
-          Log Out{" "}
+          Log Out
         </MenuItem>
       </Menu>
     </Sidebar>
