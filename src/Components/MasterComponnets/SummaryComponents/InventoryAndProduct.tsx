@@ -1,20 +1,12 @@
-import { Stack } from "@mui/material";
-import { Box } from "lucide-react";
+import { Box, Stack, Typography } from "@mui/material";
 import React from "react";
-
+import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
+import firstInvImg from ".././../../../src/assets/images/iconDashboard/inv1.svg";
+import secInvImg from ".././../../../src/assets/images/iconDashboard/inv2.svg";
 export default function InventoryAndProduct() {
   return (
     <>
-      <Box>
-        <Stack>
-          <Box>
-
-            
-          </Box>
-
-          <Box></Box>
-        </Stack>
-      </Box>
+     
     </>
   );
 }
