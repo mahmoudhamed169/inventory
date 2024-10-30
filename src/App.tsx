@@ -7,6 +7,7 @@ import ResetPassword from "./Pages/AuthPages/ResetPassword/ResetPassword";
 import { Toaster } from "react-hot-toast";
 import MasterLayout from "./Layouts/MasterLayout/MasterLayout";
 import Dashboard from "./Pages/MasterPages/Dashboard/Dashboard";
+import "./App.css";
 
 export default function App() {
   const routes = createBrowserRouter([

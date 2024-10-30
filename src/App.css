@@ -1,1 +1,36 @@
 @import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* ---------------------- sidebar component ---------------------- */
+
+.sidebar-container {
+
+    .ps-menu-button:first-child:hover {
+        background-color: transparent;
+    }
+
+    .ps-menu-button.active {
+        color: #1570EF;
+        background-color: #f3f3f3;
+        border-radius: 15px;
+    }
+
+    .ps-menu-button:hover,
+    .ps-menu-button:focus {
+        color: #1570EF !important;
+        background-color: #f3f3f3 !important;
+    }
+
+}
+
+@media (max-width: 768px) {
+    .css-1wvake5.ps-collapsed {
+        width: 65px !important;
+        min-width: 65px !important;
+    }
+}
