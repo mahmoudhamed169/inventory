@@ -6,10 +6,10 @@ export default function Dashboard() {
     <>
       <Box>
         <Grid2 container>
-          <Grid2 size={{ xs: 12, md: 8 }}>
+          <Grid2 size={{ xs: 12, md: 9 }}>
             <Typography variant="body1">Left</Typography>
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 4 }}>
+          <Grid2 size={{ xs: 12, md: 3 }}>
             <SummaryComponents />
           </Grid2>
         </Grid2>
