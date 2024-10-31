@@ -1,25 +1,33 @@
 import { Box, Button, FormControl, Stack, Typography } from "@mui/material";
-
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
 import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ForgetPasswordIn } from "../../../Interfaces/Interfaces";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import { useEffect } from "react";
 export default function ForgetPassword() {
   const navigate = useNavigate();
   let {
     register,
     handleSubmit,
+    setFocus,
     formState: { errors, isSubmitting },
   } = useForm();
+
+  useEffect(() => {
+    setFocus("email");
+  }, [setFocus]);
+
   let onSubmit = async (data) => {
     try {
       // let response = await axios.post(,data)
       // navigate("/reset-password")
     } catch (error) {}
   };
+
   return (
     <>
       <Stack sx={{ w: "90%" }} spacing={3}>
@@ -27,13 +35,18 @@ export default function ForgetPassword() {
           sx={{
             display: "flex",
             cursor: "pointer",
-            transform: "translateX(-7px)",
           }}
           onClick={() => navigate(-1)}
         >
-          <ChevronLeftIcon style={{ fontWeight: 300 }} />
+          <ArrowBackIosIcon
+            style={{ fontWeight: 300, fontSize: "16px", marginTop: "3px" }}
+          />
           <Typography
-            sx={{ fontWeight: 300, fontFamily: "Lexend, sans-serif" }}
+            sx={{
+              fontWeight: 300,
+              fontFamily: "Lexend, sans-serif",
+              fontSize: "16px",
+            }}
             variant="body1"
           >
             Back
@@ -83,6 +96,7 @@ export default function ForgetPassword() {
                   message: "Invalid email address",
                 },
               }}
+              icon={<AlternateEmailIcon />}
             />
 
             <ButtonForm name="Send OTP" isSubmitting={isSubmitting} />
