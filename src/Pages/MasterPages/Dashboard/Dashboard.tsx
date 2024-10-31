@@ -4,7 +4,7 @@ import SummaryComponents from "../../../Components/MasterComponnets/SummaryCompo
 export default function Dashboard() {
   return (
     <>
-      <Box>
+      <Box sx={{p:2}}>
         <Grid2 container>
           <Grid2 size={{ xs: 12, md: 9 }}>
             <Typography variant="body1">Left</Typography>
