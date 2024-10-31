@@ -55,7 +55,9 @@ const barChartsParams = {
 
 export default function SalesPurchaseChart() {
   return (
-    <Box sx={{ backgroundColor: "#ffff", borderRadius: "0.5rem" }}>
+    <Box
+      sx={{ backgroundColor: "#ffff", borderRadius: "0.5rem", height: "500px" }}
+    >
       <Box
         sx={{
           padding: "20px 16px",

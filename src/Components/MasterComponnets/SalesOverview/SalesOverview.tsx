@@ -13,11 +13,9 @@ export default function SalesOverview() {
         backgroundColor: "#FFFFFF",
         height: { xs: "auto", md: "10.2rem" },
         borderRadius: "0.5rem",
-        // padding: { xs: "16px", md: "20px 16px" },
-         px: 2,
-              pt: 2,
+        padding: { xs: "16px", md: "20px 16px" },
       }}
-      spacing={4}
+      spacing={2}
     >
       <Typography
         variant="h5"
@@ -36,28 +34,28 @@ export default function SalesOverview() {
           bgColor="#E8F1FD"
           number="₹ 832"
           title="Sales"
-          border = {true}
+          border={true}
         />
         <OverViewCard
           icon={RevenueIcone}
           bgColor="#ECEAFF"
           number="₹ 18,300"
           title="Revenue"
-          border = {true}
+          border={true}
         />
         <OverViewCard
           icon={ProfitIcone}
           bgColor="#FFEEDB"
           number="₹ 868"
           title="Profit"
-          border = {true}
+          border={true}
         />
         <OverViewCard
           icon={CostIcone}
           bgColor="#EBFFED"
           number="₹ 17,432"
           title="Cost"
-          border = {false}
+          border={false}
         />
       </Stack>
     </Stack>

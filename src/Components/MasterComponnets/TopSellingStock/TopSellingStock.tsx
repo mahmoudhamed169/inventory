@@ -37,7 +37,7 @@ export default function TopSellingStock() {
           height: "auto",
           borderRadius: "0.5rem",
         }}
-        spacing={4}
+        spacing={3}
       >
         <Box
           sx={{

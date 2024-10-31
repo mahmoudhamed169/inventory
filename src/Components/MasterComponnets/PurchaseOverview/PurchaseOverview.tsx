@@ -14,10 +14,9 @@ export default function PurchaseOverview() {
           backgroundColor: "#FFFFFF",
           height: { xs: "auto", md: "10.2rem" },
           borderRadius: "0.5rem",
-          px: 2,
-          pt: 2,
+          padding: { xs: "16px", md: "25px 16px" },
         }}
-        spacing={4}
+        spacing={2}
       >
         <Typography
           variant="h5"
@@ -36,14 +35,14 @@ export default function PurchaseOverview() {
             bgColor="#E5F6FD"
             number="82"
             title="Purchase"
-            border = {true}
+            border={true}
           />
           <OverViewCard
             icon={CostIcone}
             bgColor="#EBFFED"
             number="₹ 17,432"
             title="Cost"
-            border = {true}
+            border={true}
           />
 
           <OverViewCard
@@ -51,14 +50,14 @@ export default function PurchaseOverview() {
             bgColor="#E7E5FF"
             number="5"
             title="Cancel"
-            border = {true}
+            border={true}
           />
           <OverViewCard
             icon={ProfitIcone}
             bgColor="#FFEEDB"
             number="₹17,432"
             title="Return"
-            border = {false}
+            border={false}
           />
         </Stack>
       </Stack>

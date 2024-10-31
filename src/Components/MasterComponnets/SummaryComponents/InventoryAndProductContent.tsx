@@ -27,14 +27,14 @@ export default function InventoryAndProductContent({
             sx={{
               bgcolor: "white",
               borderRadius: "8px",
-              px: 2,
-              pt: 2,
+              padding: { xs: "16px", md: "20px 16px" },
+              height: { xs: "auto", md: "10.2rem" },
               w: "100%",
             }}
           >
             <Typography
               sx={{
-              fontFamily:"Inter, serif",
+                fontFamily: "Inter, serif",
                 fontWeight: 500,
                 fontSize: "20px",
                 color: "#383E49",
@@ -57,7 +57,7 @@ export default function InventoryAndProductContent({
                 <Typography
                   variant="body1"
                   sx={{
-                    fontFamily:"Inter, serif",
+                    fontFamily: "Inter, serif",
                     fontWeight: 600,
                     color: "#5D6679",
                   }}
@@ -69,7 +69,7 @@ export default function InventoryAndProductContent({
                     fontWeight: 500,
                     fontSize: "12px",
                     color: "#444444",
-                    fontFamily:"Inter, serif",
+                    fontFamily: "Inter, serif",
                     pb: 2,
                   }}
                 >
@@ -89,7 +89,7 @@ export default function InventoryAndProductContent({
                 <Typography
                   variant="body1"
                   sx={{
-                    fontFamily:"Inter, serif",
+                    fontFamily: "Inter, serif",
                     fontWeight: 600,
                     color: "#5D6679",
                   }}
@@ -101,7 +101,7 @@ export default function InventoryAndProductContent({
                     fontWeight: 500,
                     fontSize: "12px",
                     color: "#444444",
-                    fontFamily:"Inter, serif",
+                    fontFamily: "Inter, serif",
                     pb: 2,
                   }}
                 >
