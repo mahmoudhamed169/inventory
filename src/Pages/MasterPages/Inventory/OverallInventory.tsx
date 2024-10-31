@@ -7,9 +7,9 @@ export default function OverallInventory() {
       <Box
         sx={{
           backgroundColor: "#FFFFFF",
-          height: "auto",
+        
           borderRadius: "8px",
-          paddingInline: "16px",
+          p: "16px",
         }}
       >
         <Typography
@@ -19,15 +19,16 @@ export default function OverallInventory() {
             fontSize: { xs: "18px", md: "20px" },
             fontWeight: "500",
             mb: "22px",
-            color:"#383E49"
+            color:"#383E49",
+           
           }}
         >
           Overall Inventory
         </Typography>
         <Grid2 container>
           <Grid2
-            size={{ xs: 12, md: 3 }}
-            sx={{ borderRight: "1px solid #F0F1F3" }}
+            size={{ xs: 12, md:2}}
+            sx={{ borderRight: {xs:"none",md:"1px solid #F0F1F3"} }}
           >
             <Stack spacing={2}>
               <Typography
@@ -63,8 +64,8 @@ export default function OverallInventory() {
             </Stack>
           </Grid2>
           <Grid2
-            size={{ xs: 12, md: 3 }}
-            sx={{ borderRight: "1px solid #F0F1F3" }}
+            size={{ xs: 12, md: 3.5 }}
+            sx={{ borderRight: {xs:"none",md:"1px solid #F0F1F3"},px:{xs: 0, md:4} ,my:{xs:2,md:0}}}
           >
             <CardInventory
               colorProp="#E19133"
@@ -76,8 +77,8 @@ export default function OverallInventory() {
             />
           </Grid2>
           <Grid2
-            size={{ xs: 12, md: 3 }}
-            sx={{ borderRight: "1px solid #F0F1F3" }}
+            size={{ xs: 12, md: 3.5 }}
+            sx={{  borderRight: {xs:"none",md:"1px solid #F0F1F3"},px:{xs: 0, md:4},mb:{xs:2,md:0} }}
           >
             <CardInventory
               colorProp="#845EBC"
@@ -88,13 +89,13 @@ export default function OverallInventory() {
               secText="Cost"
             />
           </Grid2>
-          <Grid2 size={{ xs: 12, md: 3 }}>
+          <Grid2 size={{ xs: 12, md: 3 }}sx={{paddingLeft:{xs:0, md:4}}}>
             <CardInventory
               colorProp="#F36960"
               headerCard="Low Stocks"
               firNumber="12"
-              secNumber="2"
-              firstText="Ordered"
+             firstText="Ordered"
+              secNumber="22"
               secText="Not in stock"
             />
           </Grid2>

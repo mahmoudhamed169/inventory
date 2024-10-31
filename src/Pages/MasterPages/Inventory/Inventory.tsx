@@ -25,14 +25,14 @@ export default function Inventory() {
 
   return (
     <>
-      <Stack spacing={4} sx={{ py: 3, ps: "16px" }}>
+      <Stack spacing={3} sx={{ py: 3, ps: "16px",mx:2 }}>
         <OverallInventory />
         <Box
           sx={{
             backgroundColor: "#FFFFFF",
             height: "auto",
             borderRadius: "8px",
-            paddingInline: "16px",
+            
             
           }}
         >
@@ -41,6 +41,7 @@ export default function Inventory() {
               display: "flex",
               justifyContent: "space-between",
               my: 4,
+              paddingInline: "16px",
             }}
           >
             <Typography

@@ -8,8 +8,12 @@ export interface LoginRequest {
 }
 
 export interface LoginResponse {
+  isSuccess: boolean;
+  data: string;
   message: string;
+  errorCode: number;
 }
+
 export interface ResetRequest {
   newPassword: "string";
   confirmPassword: "string";

@@ -1,49 +1,70 @@
 import { Box, Checkbox, FormControl, Stack, Typography } from "@mui/material";
-import logo from "../../../assets/Logo.png";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useEffect } from "react";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
-import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
-import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
-import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTextField/PasswordTextField";
-import { Link } from "react-router-dom";
-import GoogleSignInButton from "../../../Components/AuthComponents/GoogleSignInButton/GoogleSignInButton";
-import AuthHeader from "../../../Components/AuthComponents/AuthHeader/AuthHeader";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
 import { LoginRequest, LoginResponse } from "../../../Interfaces/Interfaces";
 import { AUTHENTICATION_URLS } from "../../../Api/EndPoints";
+
+import logo from "../../../assets/Logo.png";
+import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
+import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
+import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTextField/PasswordTextField";
+import GoogleSignInButton from "../../../Components/AuthComponents/GoogleSignInButton/GoogleSignInButton";
+import AuthHeader from "../../../Components/AuthComponents/AuthHeader/AuthHeader";
 
 export default function Login() {
   const {
     register,
     handleSubmit,
     setFocus,
-    formState: { errors, isSubmitting },
-  } = useForm();
+    formState: { errors },
+  } = useForm<LoginRequest>();
+  const navigate = useNavigate();
+
+  const [isLoginSubmitting, setIsLoginSubmitting] = useState(false);
+  const [isGoogleSubmitting, setIsGoogleSubmitting] = useState(false);
 
   useEffect(() => {
     setFocus("email");
   }, [setFocus]);
 
   const onSubmit: SubmitHandler<LoginRequest> = async (data) => {
-    console.log(data);
-    // const toastId = toast.loading("Processing...");
-    // try {
-    //   const response = await axios.post<LoginResponse>(
-    //     AUTHENTICATION_URLS.login,
-    //     data
-    //   );
+    setIsLoginSubmitting(true);
+    const toastId = toast.loading("Processing...");
 
-    //   toast.success("Login Successfully", {
-    //     id: toastId,
-    //   });
-    // } catch (error) {
-    //   const axiosError = error as AxiosError<{ message: string }>;
-    //   toast.error(axiosError.response?.data?.message || "An error occurred", {
-    //     id: toastId,
-    //   });
-    // }
+    try {
+      const response = await axios.post<LoginResponse>(
+        AUTHENTICATION_URLS.login,
+        data
+      );
+      await toast.success(response.data.message || "Login Successfully", {
+        id: toastId,
+      });
+      if (response.data.isSuccess) {
+        localStorage.setItem("token", response.data.data);
+        navigate("/home/dashboard");
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message: string }>;
+      const errorMessage =
+        axiosError.response?.data?.message || "An error occurred";
+      toast.error(errorMessage, { id: toastId });
+    } finally {
+      setIsLoginSubmitting(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsGoogleSubmitting(true);
+
+    // Placeholder for Google sign-in logic
+    setTimeout(() => {
+      setIsGoogleSubmitting(false);
+      toast.success("Google Sign-In Successfully");
+    }, 2000); // Simulate async Google Sign-In process
   };
 
   return (
@@ -107,7 +128,7 @@ export default function Login() {
                   sx={{
                     fontFamily: "Lexend, sans-serif",
                     color: "#16151C",
-                    fontWeightL: "300",
+                    fontWeight: "300",
                   }}
                 >
                   Remember Me
@@ -128,8 +149,11 @@ export default function Login() {
             </Stack>
           </Box>
 
-          <ButtonForm name="Login" isSubmitting={isSubmitting} />
-          <GoogleSignInButton isSubmitting={isSubmitting} />
+          <ButtonForm name="Login" isSubmitting={isLoginSubmitting} />
+          <GoogleSignInButton
+            isSubmitting={isGoogleSubmitting}
+            onClick={handleGoogleSignIn}
+          />
         </Stack>
       </FormControl>
 

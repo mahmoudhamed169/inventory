@@ -21,7 +21,7 @@ export default function CardInventory({
   };
   return (
     <>
-      <Stack spacing={2} sx={{ mx: 2 }}>
+      <Stack spacing={2} >
         <Typography variant="body1" sx={detailsHeader}>
           {headerCard}
         </Typography>

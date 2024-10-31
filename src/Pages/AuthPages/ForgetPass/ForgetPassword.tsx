@@ -8,6 +8,9 @@ import axios from "axios";
 import { ForgetPasswordIn } from "../../../Interfaces/Interfaces";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import { useEffect } from "react";
+import { AUTHENTICATION_URLS } from "../../../Api/EndPoints";
+import toast from "react-hot-toast";
+import { emailValidationRules } from "../../../Validations/Validations";
 export default function ForgetPassword() {
   const navigate = useNavigate();
   let {
@@ -15,17 +18,20 @@ export default function ForgetPassword() {
     handleSubmit,
     setFocus,
     formState: { errors, isSubmitting },
-  } = useForm();
+  } = useForm<ForgetPasswordIn>();
 
   useEffect(() => {
     setFocus("email");
   }, [setFocus]);
 
-  let onSubmit = async (data) => {
+  let onSubmit = async (data: ForgetPasswordIn) => {
     try {
-      // let response = await axios.post(,data)
-      // navigate("/reset-password")
-    } catch (error) {}
+      let response = await axios.post(AUTHENTICATION_URLS.forgetPassword, data);
+      toast.success(response?.data?.message || "Email Sent Successfully");
+      navigate("/reset-password");
+    } catch (error: any) {
+      toast.error(error.response?.data?.message || "An error occurred");
+    }
   };
 
   return (
@@ -89,13 +95,7 @@ export default function ForgetPassword() {
               type="email"
               errors={errors.email}
               label="Email"
-              rules={{
-                required: "Email is required",
-                pattern: {
-                  value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                  message: "Invalid email address",
-                },
-              }}
+              rules={emailValidationRules}
               icon={<AlternateEmailIcon />}
             />
 

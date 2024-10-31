@@ -34,3 +34,13 @@
         background-color: #f3f3f3 !important;
     }
 }
+
+react-hot-toast {
+    font-family: "Liberation Mono", "Courier New", monospace";
+
+        /* Change to your preferred font */
+}
+
+.react-hot-toast__toast {
+    font-family: sans-serif;
+}
