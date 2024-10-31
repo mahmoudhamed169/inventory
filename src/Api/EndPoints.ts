@@ -1,5 +1,5 @@
 import axios from "axios";
-const baseURL = "https://upskilling-egypt.com:3005/api";
+const baseURL = "https://apis004-001-site1.etempurl.com";
 export const apiClient = axios.create({
   baseURL,
 });
@@ -13,9 +13,9 @@ apiClient.interceptors.request.use((config) => {
 });
 
 export const AUTHENTICATION_URLS = {
-  regitser: `${baseURL}/register`,
-  login: `${baseURL}/login`,
-  forgetPassword: `${baseURL}/forgot-password`,
+  regitser: `${baseURL}/RegisterUserEndPoint`,
+  login: `${baseURL}/LoginUserEndPoint`,
+  forgetPassword: `${baseURL}/ForgetPasswordEndPoint`,
   changePassword: `/change-password`,
-  resetPassword: `${baseURL}/reset-password`,
+  resetPassword: `${baseURL}/ResetPasswordEndPoint`,
 };

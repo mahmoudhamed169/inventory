@@ -39,7 +39,16 @@ export default function App() {
   return (
     <>
       <RouterProvider router={routes} />
-      <Toaster position="top-right" reverseOrder={true} />
+      <Toaster
+        position="top-center"
+        reverseOrder={true}
+        toastOptions={{
+          className: "",
+          style: {
+            fontFamily: "Lexend, sans-serif",
+          },
+        }}
+      />
     </>
   );
 }
