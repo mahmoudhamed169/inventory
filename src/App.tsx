@@ -8,6 +8,8 @@ import { Toaster } from "react-hot-toast";
 import MasterLayout from "./Layouts/MasterLayout/MasterLayout";
 import Dashboard from "./Pages/MasterPages/Dashboard/Dashboard";
 import "./App.css";
+import Inventory from "./Pages/MasterPages/Inventory/Inventory";
+import ProductInfo from "./Pages/MasterPages/ProductInfo/ProductInfo";
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -24,18 +26,20 @@ export default function App() {
       ],
     },
     {
-      path:"home",
+      path: "home",
       element: <MasterLayout />,
       children: [
         { index: true, element: <Dashboard /> },
         { path: "dashboard", element: <Dashboard /> },
+        { path: "inventory", element: <Inventory /> },
+        { path: "profuct-info", element: <ProductInfo /> },
       ],
     },
   ]);
   return (
     <>
       <RouterProvider router={routes} />
-      <Toaster position="bottom-center" reverseOrder={true} />
+      <Toaster position="top-right" reverseOrder={true} />
     </>
   );
 }
