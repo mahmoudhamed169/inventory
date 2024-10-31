@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@100..900&family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+.muiBarElement-root {
+    width: 40px !important;
+}
 
 * {
     padding: 0;
@@ -27,8 +29,8 @@
         }
     }
 
-    .css-1t8x7v1 > .ps-menu-button:hover,
-    .css-1t8x7v1 > .ps-menu-button:focus {
+    .css-1t8x7v1>.ps-menu-button:hover,
+    .css-1t8x7v1>.ps-menu-button:focus {
         background-color: #f3f3f3 !important;
     }
 }
