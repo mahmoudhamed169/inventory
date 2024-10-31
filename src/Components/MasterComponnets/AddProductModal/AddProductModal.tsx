@@ -88,6 +88,35 @@ export default function AddProductModal() {
           >
             <Stack spacing={1.7}>
               {/* Form fields for product details */}
+
+              <Box
+                sx={{ display: "flex", justifyContent: "center", gap: "20px" }}
+              >
+                <Box
+                  sx={{
+                    width: "85px",
+                    height: "85px",
+                    border: "2px dashed #858D9D",
+                    borderRadius: "10px",
+                  }}
+                ></Box>
+                <Box>
+                  <Typography
+                    sx={{
+                      color: "#858D9D",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      textAlign: "center",
+                      gap: "5px",
+                    }}
+                  >
+                    <span>Drag image here</span>
+                    <span> Or</span>
+                    <span style={{ color: "#448DF2" }}>Browse image</span>
+                  </Typography>
+                </Box>
+              </Box>
               <FormTextFieldWithLabel
                 label="Product Name"
                 name="ProductName"
