@@ -35,13 +35,12 @@ export default function SummaryComponents() {
         />
         <Chart />
 
-        {/* Stock */}
         <Box sx={{ bgcolor: "white", borderRadius: "8px", p: 2, w: "100%" }}>
           <Box>
             <Box sx={{ display: "flex", mb: 2 }}>
               <Typography
                 sx={{
-                 fontFamily:"Inter, serif",
+                  fontFamily: "Inter, serif",
                   fontWeight: 500,
                   fontSize: "20px",
                   color: "#383E49",
@@ -56,9 +55,8 @@ export default function SummaryComponents() {
                   marginTop: "3%",
                   fontSize: "14px",
                   textDecoration: "none",
-                  fontFamily:"Inter, serif",
-                  color:"#0F50AA"
-                  
+                  fontFamily: "Inter, serif",
+                  color: "#0F50AA",
                 }}
               >
                 See All
@@ -74,7 +72,7 @@ export default function SummaryComponents() {
                     sx={{
                       color: "#383E49",
                       fontWeight: 600,
-                     fontFamily:"Inter, serif",
+                      fontFamily: "Inter, serif",
                     }}
                   >
                     Chipsy
@@ -83,7 +81,7 @@ export default function SummaryComponents() {
                     sx={{
                       color: "#667085",
                       fontSize: "14px",
-                     fontFamily:"Inter, serif",
+                      fontFamily: "Inter, serif",
                     }}
                   >
                     Remaining Quantity : Packet
@@ -95,7 +93,7 @@ export default function SummaryComponents() {
                     bgcolor: "#FEECEB",
                     color: "#AA3028",
                     fontSize: "12px",
-                   fontFamily:"Inter, serif",
+                    fontFamily: "Inter, serif",
                     borderRadius: "16px",
                     textTransform: "none",
                     height: "22px",

@@ -2,6 +2,7 @@ import * as React from "react";
 import { LineChartPro } from "@mui/x-charts-pro/LineChartPro";
 import { ZoomData } from "@mui/x-charts-pro/context";
 import { Box, Typography } from "@mui/material";
+import { padding } from "./../../../../node_modules/chart.js/dist/plugins/plugin.title.d";
 
 const data = [
   { y1: 443.28, y2: 153.9 },
@@ -30,8 +31,6 @@ const data = [
 ];
 
 const chartProps = {
-  width: 340,
-  height: 250,
   series: [
     {
       label: "Ordered",
@@ -78,11 +77,18 @@ export default function ZoomControlled() {
   ]);
 
   return (
-    <Box sx={{ width: "100%", borderRadius: "8px", bgcolor: "white" }}>
+    <Box
+      sx={{
+        width: "100%",
+        borderRadius: "8px",
+        bgcolor: "white",
+        height: "500px",
+      }}
+    >
       <Typography
         sx={{
           fontWeight: 500,
-          fontFamily:"Inter, serif",
+          fontFamily: "Inter, serif",
           fontSize: "20px",
           color: "#383E49",
           pt: 2,
@@ -92,15 +98,12 @@ export default function ZoomControlled() {
         Order Summary
       </Typography>
       <LineChartPro
+        height={430}
         {...chartProps}
         zoom={zoom}
         onZoomChange={setZoom}
         xAxis={xAxisConfig}
-
-       
       />
-
-
     </Box>
   );
 }
