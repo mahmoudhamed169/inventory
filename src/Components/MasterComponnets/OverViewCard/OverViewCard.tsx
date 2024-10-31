@@ -3,10 +3,10 @@ import React from "react";
 
 interface OverViewCardProps {
   icon: React.ElementType;
-  bgColor: string;
-  number: string;
-  title: string;
-  border:boolean
+  bgColor?: string;
+  number?: string;
+  title?: string;
+  border?:boolean
 }
 
 function OverViewCard({

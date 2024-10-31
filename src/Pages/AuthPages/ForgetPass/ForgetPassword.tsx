@@ -39,7 +39,7 @@ export default function ForgetPassword() {
           onClick={() => navigate(-1)}
         >
           <ArrowBackIosIcon
-            style={{ fontWeight: 300, fontSize: "16px", marginTop: "3px" }}
+            style={{ fontWeight: 300, fontSize: "16px", marginTop: "5px" }}
           />
           <Typography
             sx={{

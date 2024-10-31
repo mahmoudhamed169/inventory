@@ -2,18 +2,18 @@ import { Box, Stack, Typography } from "@mui/material";
 
 interface Props {
   header: string;
-  imgLeft: any;
-  imgRight: any;
   numberLeft: string;
   numberRight: string;
   titleLeft: string;
   titleRight: string;
+  icon: React.ElementType;
+  iconTwo: React.ElementType;
 }
 
 export default function InventoryAndProductContent({
+  icon: IconComp,
+  iconTwo: IconCompTwo,
   header,
-  imgLeft,
-  imgRight,
   numberLeft,
   numberRight,
   titleLeft,
@@ -53,7 +53,10 @@ export default function InventoryAndProductContent({
                   width: "50%",
                 }}
               >
-                <Box component="img" src={imgLeft} />
+                {/* <Box component="img" src={imgLeft} /> */}
+
+                <IconComp/>
+
                 <Typography
                   variant="body1"
                   sx={{
@@ -67,7 +70,7 @@ export default function InventoryAndProductContent({
                 <Typography
                   sx={{
                     fontWeight: 500,
-                    fontSize: "12px",
+                    fontSize: {xs:"14px",md:"12px"},
                     color: "#444444",
                     fontFamily: "Inter, serif",
                     pb: 2,
@@ -85,7 +88,8 @@ export default function InventoryAndProductContent({
                   width: "50%",
                 }}
               >
-                <Box component="img" src={imgRight} sx={{}} />
+                {/* <Box component="img" src={imgRight} sx={{}} /> */}
+                <IconCompTwo/>
                 <Typography
                   variant="body1"
                   sx={{
@@ -99,7 +103,7 @@ export default function InventoryAndProductContent({
                 <Typography
                   sx={{
                     fontWeight: 500,
-                    fontSize: "12px",
+                    fontSize: {xs:"14px",md:"12px"},
                     color: "#444444",
                     fontFamily: "Inter, serif",
                     pb: 2,
@@ -107,6 +111,8 @@ export default function InventoryAndProductContent({
                 >
                   {titleRight}
                 </Typography>
+
+                
               </Stack>
             </Box>
           </Box>
