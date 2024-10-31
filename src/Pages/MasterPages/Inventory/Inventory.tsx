@@ -2,5 +2,9 @@ import React from "react";
 import AddProductModal from "../../../Components/MasterComponnets/AddProductModal/AddProductModal";
 
 export default function Inventory() {
-  return <div></div>;
+  return (
+    <div>
+      <AddProductModal />
+    </div>
+  );
 }
