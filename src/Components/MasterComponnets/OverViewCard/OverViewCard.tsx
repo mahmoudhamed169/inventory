@@ -6,6 +6,7 @@ interface OverViewCardProps {
   bgColor: string;
   number: string;
   title: string;
+  border:boolean
 }
 
 function OverViewCard({
@@ -13,6 +14,7 @@ function OverViewCard({
   bgColor,
   number,
   title,
+  border,
 }: OverViewCardProps) {
   return (
     <Stack
@@ -20,7 +22,7 @@ function OverViewCard({
       className="card"
       sx={{
         paddingRight: "25px",
-        borderRight: "1px solid #F0F1F3",
+        borderRight: border ? "1px solid #F0F1F3" : "none", 
         width: "100%",
         alignItems: "center",
       }}

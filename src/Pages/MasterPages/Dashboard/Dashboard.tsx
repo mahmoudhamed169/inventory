@@ -11,7 +11,7 @@ export default function Dashboard() {
       <Box sx={{ backgroundColor: "#f0f1f3", padding: "22px 30px" }}>
         <Grid2 container>
           <Grid2 size={{ xs: 12, md: 9 }}>
-            <Stack spacing={3.5} sx={{ width: "800px" }}>
+            <Stack spacing={2} sx={{ width: "800px" }}>
               <SalesOverview />
               <PurchaseOverview />
               <SalesPurchaseChart />
