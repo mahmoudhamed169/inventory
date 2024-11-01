@@ -1,0 +1,6 @@
+.product-imge{
+    width: 100%;
+    max-width: 300px;
+    border: 2px dashed #9D9D9D;
+    padding: 10px;
+}
