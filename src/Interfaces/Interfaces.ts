@@ -7,7 +7,7 @@ export interface LoginRequest {
   password: string;
 }
 
-export interface LoginResponse {
+export interface AuthResponse {
   isSuccess: boolean;
   data: string;
   message: string;

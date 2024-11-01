@@ -5,7 +5,11 @@ import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
-import { LoginRequest, LoginResponse } from "../../../Interfaces/Interfaces";
+import {
+  AuthResponse,
+  LoginRequest,
+  LoginResponse,
+} from "../../../Interfaces/Interfaces";
 import { AUTHENTICATION_URLS } from "../../../Api/EndPoints";
 
 import logo from "../../../assets/Logo.png";
@@ -36,7 +40,7 @@ export default function Login() {
     const toastId = toast.loading("Processing...");
 
     try {
-      const response = await axios.post<LoginResponse>(
+      const response = await axios.post<AuthResponse>(
         AUTHENTICATION_URLS.login,
         data
       );
