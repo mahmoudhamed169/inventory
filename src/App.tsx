@@ -11,6 +11,8 @@ import "./App.css";
 import Inventory from "./Pages/MasterPages/Inventory/Inventory";
 import ProductInfo from "./Pages/MasterPages/ProductInfo/ProductInfo";
 import ProtectedRoute from "./Components/shared/ProtectedRoute/ProtectedRoute";
+import ManageStore from "./Pages/MasterPages/ManageStore/ManageStore";
+import Suppliers from "./Pages/MasterPages/Suppliers/Suppliers";
 import Reports from "./Pages/MasterPages/Reports/Reports";
 
 export default function App() {
@@ -39,6 +41,8 @@ export default function App() {
         { path: "dashboard", element: <Dashboard /> },
         { path: "inventory", element: <Inventory /> },
         { path: "profuct-info", element: <ProductInfo /> },
+        { path: "manage-store", element: <ManageStore /> },
+        { path: "suppliers", element: <Suppliers /> },
         { path: "reports", element: <Reports /> },
       ],
     },

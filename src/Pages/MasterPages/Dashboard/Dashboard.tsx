@@ -28,9 +28,7 @@ export default function Dashboard() {
           </Grid2>
           <Grid2 size={{ xs: 12, md: 4 }}>
             <Stack spacing={2}>
-       
-           <SummaryComponents/>
-              
+              <SummaryComponents />
             </Stack>
           </Grid2>
         </Grid2>
