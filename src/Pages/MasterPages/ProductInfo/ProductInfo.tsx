@@ -124,7 +124,6 @@ export default function ProductInfo() {
 
               <Box
                 sx={{
-                  marginTop: { xs: "1.5rem", md: "2rem" },
                   display: "flex",
                   justifyContent: "center",
                 }}
@@ -134,7 +133,7 @@ export default function ProductInfo() {
             </Grid2>
 
             {/* --------------- Stock Locations --------------- */}
-            <Grid2 size={{ xs: 12, md: 8 }} sx={{ marginTop: "1.5rem" }}>
+            <Grid2 size={{ xs: 12, md: 8 }}>
               <Stack>
                 <TableForProductInfo
                   title="Stock Locations"
