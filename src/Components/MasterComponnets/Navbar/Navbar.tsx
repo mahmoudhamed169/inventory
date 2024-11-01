@@ -10,9 +10,13 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import { Search, SearchIconWrapper, StyledInputBase } from "./NavbarStyle";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../../Context/AuthContext/AuthContext";
 
 export default function Navbar() {
+  const { userData } = useContext(AuthContext);
+  console.log(userData);
+
   // State to manage the anchor element for the mobile menu
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
     useState<null | HTMLElement>(null);
@@ -70,7 +74,7 @@ export default function Navbar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+          <Avatar>N</Avatar>
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -120,7 +124,7 @@ export default function Navbar() {
               aria-haspopup="true"
               color="inherit"
             >
-              <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg" />
+              <Avatar sx={{backgroundColor:"#3252DF"}}>{userData.UserName.slice(0, 1).toUpperCase()}</Avatar>
             </IconButton>
           </Box>
 

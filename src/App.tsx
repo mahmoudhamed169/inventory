@@ -10,6 +10,7 @@ import Dashboard from "./Pages/MasterPages/Dashboard/Dashboard";
 import "./App.css";
 import Inventory from "./Pages/MasterPages/Inventory/Inventory";
 import ProductInfo from "./Pages/MasterPages/ProductInfo/ProductInfo";
+import ProtectedRoute from "./Components/shared/ProtectedRoute/ProtectedRoute";
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -27,7 +28,11 @@ export default function App() {
     },
     {
       path: "home",
-      element: <MasterLayout />,
+      element: (
+        <ProtectedRoute>
+          <MasterLayout />
+        </ProtectedRoute>
+      ),
       children: [
         { index: true, element: <Dashboard /> },
         { path: "dashboard", element: <Dashboard /> },
