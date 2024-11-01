@@ -15,7 +15,6 @@ import { AuthContext } from "../../../Context/AuthContext/AuthContext";
 
 export default function Navbar() {
   const { userData } = useContext(AuthContext);
-  console.log(userData);
 
   // State to manage the anchor element for the mobile menu
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] =
@@ -74,7 +73,9 @@ export default function Navbar() {
           aria-haspopup="true"
           color="inherit"
         >
-          <Avatar>N</Avatar>
+          <Avatar sx={{ backgroundColor: "#3252DF" }}>
+            {userData.UserName.slice(0, 1).toUpperCase()}
+          </Avatar>
         </IconButton>
         <p>Profile</p>
       </MenuItem>
@@ -124,7 +125,9 @@ export default function Navbar() {
               aria-haspopup="true"
               color="inherit"
             >
-              <Avatar sx={{backgroundColor:"#3252DF"}}>{userData.UserName.slice(0, 1).toUpperCase()}</Avatar>
+              <Avatar sx={{ backgroundColor: "#3252DF" }}>
+                {userData.UserName.slice(0, 1).toUpperCase()}
+              </Avatar>
             </IconButton>
           </Box>
 
