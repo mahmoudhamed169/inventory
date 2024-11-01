@@ -90,7 +90,7 @@ export default function Navbar() {
       >
         <Toolbar>
           {/* --------------- Search input section --------------- */}
-          <Search sx={{ minWidth: "320px" }}>
+          <Search sx={{ minWidth: { md: "320px" } }}>
             <SearchIconWrapper>
               <SearchIcon />
             </SearchIconWrapper>
