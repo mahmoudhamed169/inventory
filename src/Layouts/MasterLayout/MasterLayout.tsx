@@ -29,7 +29,7 @@ export default function MasterLayout() {
       </Box>
       <Box sx={{ flexGrow: "1" }}>
         <Navbar />
-        <Box sx={{ bgcolor: "#f0f1f3" }}>
+        <Box sx={{ bgcolor: "#f0f1f3", height: "90vh" }}>
           <Outlet />
         </Box>
       </Box>
