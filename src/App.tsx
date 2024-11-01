@@ -11,6 +11,7 @@ import "./App.css";
 import Inventory from "./Pages/MasterPages/Inventory/Inventory";
 import ProductInfo from "./Pages/MasterPages/ProductInfo/ProductInfo";
 import ProtectedRoute from "./Components/shared/ProtectedRoute/ProtectedRoute";
+import ManageStore from "./Pages/MasterPages/ManageStore/ManageStore";
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -38,6 +39,7 @@ export default function App() {
         { path: "dashboard", element: <Dashboard /> },
         { path: "inventory", element: <Inventory /> },
         { path: "profuct-info", element: <ProductInfo /> },
+        { path: "manage-store", element: <ManageStore /> },
       ],
     },
   ]);
