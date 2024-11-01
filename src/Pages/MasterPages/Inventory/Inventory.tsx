@@ -8,6 +8,7 @@ import TableRow from "@mui/material/TableRow";
 import OverallInventory from "./OverallInventory";
 import AddProductModal from "../../../Components/MasterComponnets/AddProductModal/AddProductModal";
 import { Link } from "react-router-dom";
+import Pagination from "../../../Components/MasterComponnets/Pagination/Pagination";
 
 export default function Inventory() {
   const rows = Array.from({ length: 9 }, (_, index) => ({
@@ -122,6 +123,7 @@ export default function Inventory() {
               </TableBody>
             </Table>
           </TableContainer>
+          <Pagination />
         </Box>
       </Stack>
     </>
