@@ -26,3 +26,23 @@ export const emailValidationRules = {
     message: "Invalid email address",
   },
 };
+
+export const UserNameValidation = (
+  minLength: number = 3,
+  maxLength: number = 15
+) => ({
+  required: "Username is required",
+  minLength: {
+    value: minLength,
+    message: `Username must be at least ${minLength} characters long`,
+  },
+  maxLength: {
+    value: maxLength,
+    message: `Username cannot exceed ${maxLength} characters`,
+  },
+  pattern: {
+    value: /^[a-zA-Z0-9_-]+$/,
+    message:
+      "Username can contain only letters, numbers, underscores, or hyphens",
+  },
+});

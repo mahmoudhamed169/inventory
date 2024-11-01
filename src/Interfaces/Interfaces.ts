@@ -20,3 +20,9 @@ export interface ResetRequest {
   email: "string";
   otpCode: "string";
 }
+export interface RegisterRequest {
+  userName: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
+}
