@@ -2,10 +2,11 @@ import * as React from "react";
 import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
 import { BarChart } from "@mui/x-charts/BarChart";
-import { Button, colors, Typography } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { Calendar } from "lucide-react";
+import { BarChartProps, useDrawingArea } from "@mui/x-charts";
 
-const barChartsParams = {
+const barChartsParams: BarChartProps = {
   series: [
     {
       id: "sales",
@@ -16,8 +17,7 @@ const barChartsParams = {
       highlightScope: {
         highlight: "item",
       },
-      // color: "url(#sales-gradient)", // Apply gradient for sales
-      // color: "#51CC5D",
+      color: "#51CC5D",
     },
     {
       id: "purchase",
@@ -28,7 +28,7 @@ const barChartsParams = {
       highlightScope: {
         highlight: "item",
       },
-      // color: "#79D0F1",
+      color: "#74B0FA",
     },
   ],
   xAxis: [
@@ -38,6 +38,7 @@ const barChartsParams = {
         "Feb",
         "Mar",
         "Apr",
+        "May",
         "Jun",
         "Jul",
         "Aug",
@@ -50,7 +51,9 @@ const barChartsParams = {
     },
   ],
   height: 400,
-  // width: 200,
+  slotProps: {
+    bar: { style: { width: "15px" } },
+  },
 };
 
 export default function SalesPurchaseChart() {
@@ -76,7 +79,6 @@ export default function SalesPurchaseChart() {
         >
           Sales & Purchase
         </Typography>
-
         <Button
           sx={{
             textTransform: "none",
@@ -98,33 +100,44 @@ export default function SalesPurchaseChart() {
         sx={{ width: "100%" }}
       >
         <Box sx={{ flexGrow: 1 }}>
-          {/* <svg style={{ display: "none" }}>
-          <defs>
-            <linearGradient id="sales-gradient" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor="#46A46C" />
-              <stop offset="47.92%" stopColor="#51CC5D" />
-              <stop offset="100%" stopColor="#57DA65" />
-            </linearGradient>
-            <linearGradient id="purchase-gradient" x1="0" x2="0" y1="0" y2="1">
-              <stop offset="0%" stopColor="#817AF3" />
-              <stop offset="50%" stopColor="#74B0FA" />
-              <stop offset="100%" stopColor="#79D0F1" />
-            </linearGradient>
-          </defs>
-        </svg> */}
-
           <BarChart
             {...barChartsParams}
             sx={{
-              "& .muiBarElement-root": {
-                color: "red",
-                width: "40px",
+              "& .MuiBarElement-series-sales": {
+                // fill: "url(#purchase-gradient)",
+                fill: "url(#sales-gradient)",
+              },
+              "& .MuiBarElement-series-purchase": {
+                // fill: "url(#purchase-gradient)",
+                fill: "url(#purchase-gradient)",
               },
             }}
-            borderRadius={10}
-          />
+          >
+            <Colorswitch />
+          </BarChart>
         </Box>
       </Stack>
     </Box>
   );
 }
+
+const Colorswitch = () => {
+  const { top, height, bottom } = useDrawingArea();
+  const svgHeight = top + bottom + height;
+  return (
+    <>
+      <defs>
+        <linearGradient id="sales-gradient" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stopColor="#46A46C" />
+          <stop offset="50%" stopColor="#51CC5D" />
+          <stop offset="100%" stopColor="#57DA65" />
+        </linearGradient>
+        <linearGradient id="purchase-gradient" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0%" stopColor="#817AF3" />
+          <stop offset="50%" stopColor="#74B0FA" />
+          <stop offset="100%" stopColor="#79D0F1" />
+        </linearGradient>
+      </defs>
+    </>
+  );
+};
