@@ -1,7 +1,7 @@
 import { Box, Checkbox, FormControl, Stack, Typography } from "@mui/material";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import axios, { AxiosError } from "axios";
@@ -18,8 +18,10 @@ import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm
 import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTextField/PasswordTextField";
 import GoogleSignInButton from "../../../Components/AuthComponents/GoogleSignInButton/GoogleSignInButton";
 import AuthHeader from "../../../Components/AuthComponents/AuthHeader/AuthHeader";
+import { AuthContext } from "../../../Context/AuthContext/AuthContext";
 
 export default function Login() {
+  const { saveUserData } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
@@ -48,7 +50,8 @@ export default function Login() {
         id: toastId,
       });
       if (response.data.isSuccess) {
-        localStorage.setItem("token", response.data.data);
+        await localStorage.setItem("token", response.data.data);
+        saveUserData();
         navigate("/home/dashboard");
       }
     } catch (error) {
