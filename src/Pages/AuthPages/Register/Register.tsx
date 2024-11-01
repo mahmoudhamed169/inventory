@@ -1,6 +1,6 @@
 import { Box, FormControl, Stack, Typography } from "@mui/material";
-import { useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
 import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
 import GoogleSignInButton from "../../../Components/AuthComponents/GoogleSignInButton/GoogleSignInButton";
@@ -8,27 +8,64 @@ import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTe
 import logo from "../../../assets/Logo.png";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import PersonIcon from "@mui/icons-material/Person";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Styles from "./Register.module.css";
 import AuthHeader from "../../../Components/AuthComponents/AuthHeader/AuthHeader";
+import {
+  emailValidationRules,
+  PasswordValidation,
+  UserNameValidation,
+} from "../../../Validations/Validations";
+import { AuthResponse, RegisterRequest } from "../../../Interfaces/Interfaces";
+import toast from "react-hot-toast";
+import { AUTHENTICATION_URLS } from "../../../Api/EndPoints";
+import axios, { AxiosError } from "axios";
 
 export default function Register() {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
     setFocus,
-    formState: { errors, isSubmitting },
-  } = useForm();
+    formState: { errors },
+    watch,
+  } = useForm<RegisterRequest>();
+  const [isRegisterSubmitting, setIsRegisterSubmitting] = useState(false);
+  const [isGoogleSubmitting, setIsGoogleSubmitting] = useState(false);
 
   useEffect(() => {
-    setFocus("name");
+    setFocus("userName");
   }, [setFocus]);
 
-  const onSubmit = (data: any) => {
+  const onSubmit: SubmitHandler<RegisterRequest> = async (data) => {
+    console.log(data);
+    setIsRegisterSubmitting(true);
+    const toastId = toast.loading("Processing...");
+
     try {
-      console.log(data);
+      const response = await axios.post<AuthResponse>(
+        AUTHENTICATION_URLS.regitser,
+        data
+      );
+
+      if (response.data.isSuccess) {
+        toast.success("Registered successfully! Please log in.", {
+          id: toastId,
+        });
+        navigate("/login");
+      } else {
+        toast.error("Registration failed. Please try again.", {
+          id: toastId,
+        });
+      }
     } catch (error) {
-      console.log(error);
+      const axiosError = error as AxiosError<{ message: string }>;
+      const errorMessage =
+        axiosError.response?.data?.message ||
+        "An error occurred during registration.";
+      toast.error(errorMessage, { id: toastId });
+    } finally {
+      setIsRegisterSubmitting(false);
     }
   };
 
@@ -59,18 +96,12 @@ export default function Register() {
             {/*  ------------------ Name input field  ------------------ */}
             <Box>
               <FormTextField
-                name="name"
-                placeholder="Enter your name"
+                name="userName"
+                placeholder="Enter your userName"
                 register={register}
-                errors={errors.name}
-                rules={{
-                  required: "Name is required",
-                  pattern: {
-                    value: /^[a-zA-Z\s'-]{3,}$/,
-                    message: "Invalid Name",
-                  },
-                }}
-                label="Name"
+                errors={errors.userName}
+                rules={UserNameValidation(3, 15)}
+                label="User Name"
                 type="text"
                 icon={<PersonIcon />}
               />
@@ -83,13 +114,7 @@ export default function Register() {
                 placeholder="Enter your email"
                 register={register}
                 errors={errors.email}
-                rules={{
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$/,
-                    message: "Invalid email address",
-                  },
-                }}
+                rules={emailValidationRules}
                 label="Email"
                 type="email"
                 icon={<AlternateEmailIcon />}
@@ -104,12 +129,30 @@ export default function Register() {
                 placeholder="Create a password"
                 errors={errors.password}
                 register={register}
-                rules={{ required: "Password is required" }}
+                rules={PasswordValidation(8)}
+              />
+            </Box>
+
+            <Box>
+              <PasswordTextField
+                label="Confirm Password"
+                name="confirmPassword"
+                placeholder="Confirm your password"
+                errors={errors.confirmPassword}
+                register={register}
+                rules={{
+                  required: "Confirm password is required",
+                  validate: (value) =>
+                    value === watch("password") || "Passwords do not match",
+                }}
               />
             </Box>
 
             {/*  ------------------ Submit button for form  ------------------ */}
-            <ButtonForm name="Get started" isSubmitting={isSubmitting} />
+            <ButtonForm
+              name="Get started"
+              isSubmitting={isRegisterSubmitting}
+            />
 
             {/*  ------------------ Google Sign-Up Button ------------------ */}
             <GoogleSignInButton />

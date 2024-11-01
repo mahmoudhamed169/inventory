@@ -2,10 +2,10 @@ import { Box, Button, FormControl, Stack, Typography } from "@mui/material";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
 import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
-import { ForgetPasswordIn } from "../../../Interfaces/Interfaces";
+import axios, { AxiosError } from "axios";
+import { AuthResponse, ForgetPasswordIn } from "../../../Interfaces/Interfaces";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
 import { useEffect } from "react";
 import { AUTHENTICATION_URLS } from "../../../Api/EndPoints";
@@ -24,13 +24,31 @@ export default function ForgetPassword() {
     setFocus("email");
   }, [setFocus]);
 
-  let onSubmit = async (data: ForgetPasswordIn) => {
+  const onSubmit: SubmitHandler<ForgetPasswordIn> = async (data) => {
+    const toastId = toast.loading("Processing...");
+
     try {
-      let response = await axios.post(AUTHENTICATION_URLS.forgetPassword, data);
-      toast.success(response?.data?.message || "Email Sent Successfully");
-      navigate("/reset-password");
-    } catch (error: any) {
-      toast.error(error.response?.data?.message || "An error occurred");
+      const response = await axios.post<AuthResponse>(
+        AUTHENTICATION_URLS.forgetPassword,
+        data
+      );
+
+      if (response.data.isSuccess) {
+        toast.success("Password reset OTP sent! Check your email.", {
+          id: toastId,
+        });
+        navigate("/reset-password");
+      } else {
+        toast.error(response.data.message, {
+          id: toastId,
+        });
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message: string }>;
+      const errorMessage =
+        axiosError.response?.data?.message ||
+        "An error occurred while processing the request.";
+      toast.error(errorMessage, { id: toastId });
     }
   };
 

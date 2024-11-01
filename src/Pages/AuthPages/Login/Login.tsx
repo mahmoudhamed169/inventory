@@ -44,7 +44,7 @@ export default function Login() {
         AUTHENTICATION_URLS.login,
         data
       );
-      await toast.success(response.data.message || "Login Successfully", {
+      await toast.success("Login Successfully", {
         id: toastId,
       });
       if (response.data.isSuccess) {

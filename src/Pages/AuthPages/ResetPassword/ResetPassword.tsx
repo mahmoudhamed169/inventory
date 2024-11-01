@@ -59,9 +59,13 @@ export default function ResetPassword() {
         );
         navigate("/login");
       } else {
-        toast.error("Unable to reset password. Please try again.", {
-          id: toastId,
-        });
+        toast.error(
+          response?.data.message ||
+            "Unable to reset password. Please try again.",
+          {
+            id: toastId,
+          }
+        );
       }
     } catch (error) {
       const axiosError = error as AxiosError<AuthResponse>;
@@ -85,7 +89,7 @@ export default function ResetPassword() {
         spacing={3}
       >
         <Link
-          to="/login"
+          to="/forget-password"
           style={{
             textDecoration: "none",
             display: "flex",
