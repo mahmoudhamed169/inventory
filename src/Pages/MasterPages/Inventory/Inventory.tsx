@@ -6,6 +6,8 @@ import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
 import OverallInventory from "./OverallInventory";
+import AddProductModal from "../../../Components/MasterComponnets/AddProductModal/AddProductModal";
+import { Link } from "react-router-dom";
 
 export default function Inventory() {
   const rows = Array.from({ length: 9 }, (_, index) => ({
@@ -25,15 +27,13 @@ export default function Inventory() {
 
   return (
     <>
-      <Stack spacing={3} sx={{ py: 3, ps: "16px",mx:2 }}>
+      <Stack spacing={3} sx={{ py: 3, ps: "16px", mx: 2 }}>
         <OverallInventory />
         <Box
           sx={{
             backgroundColor: "#FFFFFF",
             height: "auto",
             borderRadius: "8px",
-            
-            
           }}
         >
           <Box
@@ -51,12 +51,14 @@ export default function Inventory() {
                 fontSize: { xs: "18px", md: "20px" },
                 fontWeight: "500",
                 fontFamily: "Inter, serif",
-               color:"#383E49"
+                color: "#383E49",
               }}
             >
               Products
             </Typography>
-            <Button
+            <AddProductModal />
+
+            {/* <Button
               type="submit"
               sx={{
                 backgroundColor: "#1366D9",
@@ -69,7 +71,7 @@ export default function Inventory() {
               variant="contained"
             >
               Add Product
-            </Button>
+            </Button> */}
           </Box>
           <TableContainer component={"table"}>
             <Table sx={{ minWidth: 660 }} aria-label="simple table">
@@ -100,7 +102,15 @@ export default function Inventory() {
                     sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                      {row.Products}
+                      <Link
+                        to={"/home/profuct-info"}
+                        style={{
+                          textDecoration: "none",
+                          color: "#48505E",
+                        }}
+                      >
+                        {row.Products}
+                      </Link>
                     </TableCell>
                     <TableCell align="left">{row.Price}</TableCell>
                     <TableCell align="left">{row.Quantity}</TableCell>

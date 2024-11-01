@@ -11,6 +11,11 @@ import FactCheckIcon from "@mui/icons-material/FactCheck";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import LogoutIcon from "@mui/icons-material/Logout";
 import LogoIcone from "../../../Icones/LogoIcone";
+import HomeIcone from "../../../Icones/HomeIcone";
+import ReportSideBarIcone from "../../../Icones/ReportSideBarIcone";
+import SuppliersSideBarIcone from "../../../Icones/SuppliersSideBarIcone";
+import OrdersSideBarIcone from "../../../Icones/OrdersSideBarIcone";
+import ListSideBarIcone from "../../../Icones/ListSideBarIcone";
 
 export default function SideBar() {
   const navigate = useNavigate();
@@ -53,13 +58,12 @@ export default function SideBar() {
         backgroundColor: "#fff",
         width: isMobile ? "65px" : "250px",
         minWidth: isMobile ? "65px" : "250px",
+        fontFamily: "Lexend, sans-serif",
       }}
       collapsed={isCollapse}
       className="sidebar-container"
     >
-      <Menu
-        rootStyles={{ height: "85%", overflowY: "hidden" }}
-      >
+      <Menu rootStyles={{ height: "85%", overflowY: "hidden" }}>
         <MenuItem
           component={<Link to="/home/dashboard" />}
           icon={<LogoIcone />}
@@ -74,42 +78,42 @@ export default function SideBar() {
         </MenuItem>
         <MenuItem
           component={<Link to="/home/dashboard" />}
-          icon={<HomeOutlinedIcon />}
+          icon={<HomeIcone />}
           className={getMenuItemClassName("/home/dashboard")}
         >
           Dashboard
         </MenuItem>
         <MenuItem
-          component={<Link to="/inventory" />}
+          component={<Link to="/home/inventory" />}
           icon={<InventoryIcone />}
           className={getMenuItemClassName("/inventory")}
         >
           Inventory
         </MenuItem>
         <MenuItem
-          component={<Link to="/reports" />}
-          icon={<BarChartOutlinedIcon />}
-          className={getMenuItemClassName("/reports")}
+          component={<Link to="/home/reports" />}
+          icon={<ReportSideBarIcone />}
+          className={getMenuItemClassName("/home/reports")}
         >
           Reports
         </MenuItem>
         <MenuItem
-          component={<Link to="/suppliers" />}
-          icon={<AccountCircleOutlinedIcon />}
-          className={getMenuItemClassName("/suppliers")}
+          component={<Link to="/home/suppliers" />}
+          icon={<SuppliersSideBarIcone />}
+          className={getMenuItemClassName("/home/suppliers")}
         >
           Suppliers
         </MenuItem>
         <MenuItem
-          component={<Link to="/orders" />}
-          icon={<Inventory2OutlinedIcon />}
+          component={<Link to="/home/orders" />}
+          icon={<OrdersSideBarIcone />}
           className={getMenuItemClassName("/orders")}
         >
           Orders
         </MenuItem>
         <MenuItem
-          component={<Link to="/manage-store" />}
-          icon={<FactCheckIcon />}
+          component={<Link to="/home/manage-store" />}
+          icon={<ListSideBarIcone />}
           className={getMenuItemClassName("/manage-store")}
         >
           Manage Store
@@ -118,14 +122,14 @@ export default function SideBar() {
 
       <Menu rootStyles={{ height: "15%" }}>
         <MenuItem
-          component={<Link to="/settings" />}
+          component={<Link to="/home/settings" />}
           icon={<SettingsOutlinedIcon />}
           className={getMenuItemClassName("/settings")}
         >
           Settings
         </MenuItem>
         <MenuItem
-          component={<Link to="/logout" />}
+          component={<Link to="/login" />}
           icon={<LogoutIcon />}
           onClick={() => {
             localStorage.removeItem("token");
