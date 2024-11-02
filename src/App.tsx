@@ -8,12 +8,14 @@ import { Toaster } from "react-hot-toast";
 import MasterLayout from "./Layouts/MasterLayout/MasterLayout";
 import Dashboard from "./Pages/MasterPages/Dashboard/Dashboard";
 import "./App.css";
-import Inventory from "./Pages/MasterPages/Inventory/Inventory";
+
 import ProductInfo from "./Pages/MasterPages/ProductInfo/ProductInfo";
 import ProtectedRoute from "./Components/shared/ProtectedRoute/ProtectedRoute";
 import ManageStore from "./Pages/MasterPages/ManageStore/ManageStore";
 import Suppliers from "./Pages/MasterPages/Suppliers/Suppliers";
 import Reports from "./Pages/MasterPages/Reports/Reports";
+import Orders from "./Pages/MasterPages/Orders/Orders";
+import Inventory from "./Pages/MasterPages/Inventory/Inventory";
 
 export default function App() {
   const routes = createBrowserRouter([
@@ -39,11 +41,13 @@ export default function App() {
       children: [
         { index: true, element: <Dashboard /> },
         { path: "dashboard", element: <Dashboard /> },
-        { path: "inventory", element: <Inventory /> },
+        { path: "inventory", element: <Inventory/> },
         { path: "profuct-info", element: <ProductInfo /> },
         { path: "manage-store", element: <ManageStore /> },
         { path: "suppliers", element: <Suppliers /> },
         { path: "reports", element: <Reports /> },
+        { path: "orders", element: <Orders /> },
+        
       ],
     },
   ]);

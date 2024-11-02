@@ -1,4 +1,11 @@
 import { Box, Stack, Typography } from "@mui/material";
+
+interface FirstColum {
+  headerText: string;
+  number: string;
+  lastText: string;
+}
+
 interface Card {
   colorProp: string;
   headerCard: string;
@@ -7,21 +14,61 @@ interface Card {
   firstText: string;
   secText: string;
 }
-export default function CardInventory({
+
+export const FirstColumn = ({ headerText, number, lastText }: FirstColum) => {
+  return (
+    <>
+      <Stack spacing={2}>
+        <Typography
+          variant="body1"
+          sx={{
+            color: "#1570EF",
+            fontWeight: 600,
+            fontFamily: "Inter, serif",
+          }}
+        >
+          {headerText}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color: "#5D6679",
+            fontWeight: 600,
+            fontFamily: "Inter, serif",
+          }}
+        >
+          {number}
+        </Typography>
+        <Typography
+          variant="body1"
+          sx={{
+            color: "#858D9D",
+            fontSize: "14px",
+            fontFamily: "Inter, serif",
+          }}
+        >
+          {lastText}
+        </Typography>
+      </Stack>
+    </>
+  );
+};
+
+export const CardComponent = ({
   colorProp,
   headerCard,
   firNumber,
   secNumber,
   firstText,
   secText,
-}: Card) {
+}: Card) => {
   const detailsHeader = {
     color: colorProp,
     fontWeight: 600,
   };
   return (
     <>
-      <Stack spacing={2} >
+      <Stack spacing={2}>
         <Typography variant="body1" sx={detailsHeader}>
           {headerCard}
         </Typography>
@@ -74,4 +121,4 @@ export default function CardInventory({
       </Stack>
     </>
   );
-}
+};
