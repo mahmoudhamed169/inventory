@@ -2,6 +2,7 @@ import { Box, Grid2 } from "@mui/material";
 import ReportsOverview from "../../../Components/MasterComponnets/ReportsOverview/ReportsOverview";
 import ReportsBestSelling from "../../../Components/MasterComponnets/ReportsBestSelling/ReportsBestSelling";
 import ReportsBestSellingTable from "../../../Components/MasterComponnets/ReportsBestSellingTable/ReportsBestSellingTable";
+import ProfitRevenueChart from "../../../Components/MasterComponnets/ProfitRevenueChart/ProfitRevenueChart";
 
 export default function Reports() {
   return (
@@ -37,6 +38,17 @@ export default function Reports() {
           <ReportsBestSelling />
         </Grid2>
       </Grid2>
+
+      <Box
+        sx={{
+          backgroundColor: "#fff",
+          marginBlock: "1.375rem",
+          padding: { xs: "15px 20px", sm: "20px 25px", md: "22px 30px" },
+          borderRadius: "0.5rem",
+        }}
+      >
+        <ProfitRevenueChart />
+      </Box>
 
       {/* --------------- Component rendering best-selling Table --------------- */}
       <Box
