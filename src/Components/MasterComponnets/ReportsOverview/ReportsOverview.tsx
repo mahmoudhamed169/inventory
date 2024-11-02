@@ -5,7 +5,6 @@ export default function ReportsOverview() {
     <Box sx={{ fontFamily: "Inter ,serif" }}>
       {/* --------------- Title for the Overview section --------------- */}
       <Typography variant="h5">Overview</Typography>
-      
 
       {/*  ------------------------------ First row  ------------------------------ */}
       <Grid2
@@ -48,7 +47,7 @@ export default function ReportsOverview() {
         </Grid2>
 
         {/* --------------- Sales --------------- */}
-        <Grid2 size={{ xs: 12, md: 2 }} >
+        <Grid2 size={{ xs: 12, md: 2 }}>
           <Box sx={{ textAlign: "center", paddingBlock: "1rem" }}>
             <Typography component="p" sx={{ color: " #5D6679" }}>
               ₹17,432
@@ -63,7 +62,6 @@ export default function ReportsOverview() {
         </Grid2>
       </Grid2>
 
-
       {/* ------------------------------ Second row ------------------------------ */}
       <Grid2
         container
@@ -72,7 +70,10 @@ export default function ReportsOverview() {
         }}
       >
         {/* --------------- Net purchase value --------------- */}
-        <Grid2 size={{ xs: 6, lg: 1.5 }}>
+        <Grid2
+          size={{ xs: 6, lg: 1.5 }}
+          sx={{ textAlign: { xs: "center", md: "left" } }}
+        >
           <Box sx={{ paddingBlock: "1rem" }}>
             <Typography component="p" sx={{ color: "5D6679" }}>
               ₹1,17,432
@@ -87,7 +88,10 @@ export default function ReportsOverview() {
         </Grid2>
 
         {/* --------------- Net sales value --------------- */}
-        <Grid2 size={{ xs: 6, lg: 1.5 }}>
+        <Grid2
+          size={{ xs: 6, lg: 1.5 }}
+          sx={{ textAlign: { xs: "center", md: "left" } }}
+        >
           <Box sx={{ paddingBlock: "1rem", width: "100%" }}>
             <Typography component="p" sx={{ color: "5D6679" }}>
               ₹80,432
@@ -102,7 +106,10 @@ export default function ReportsOverview() {
         </Grid2>
 
         {/* --------------- MoM Profit --------------- */}
-        <Grid2 size={{ xs: 6, lg: 1.5 }}>
+        <Grid2
+          size={{ xs: 6, lg: 1.5 }}
+          sx={{ textAlign: { xs: "center", md: "left" } }}
+        >
           <Box sx={{ paddingBlock: "1rem" }}>
             <Typography component="p" sx={{ color: "5D6679" }}>
               ₹30,432
@@ -117,7 +124,10 @@ export default function ReportsOverview() {
         </Grid2>
 
         {/* --------------- YoY Profit --------------- */}
-        <Grid2 size={{ xs: 6, lg: 1.5 }}>
+        <Grid2
+          size={{ xs: 6, lg: 1.5 }}
+          sx={{ textAlign: { xs: "center", md: "left" } }}
+        >
           <Box sx={{ paddingBlock: "1rem" }}>
             <Typography component="p" sx={{ color: "5D6679" }}>
               ₹1,10,432
