@@ -1,24 +1,24 @@
-import { Box, Button, Stack, Typography } from "@mui/material";
+import { Button, Stack, Box } from "@mui/material";
+import OverAllOrders from "./OverAllOrders";
 import Table from "@mui/material/Table";
 import TableBody from "@mui/material/TableBody";
 import TableCell from "@mui/material/TableCell";
 import TableContainer from "@mui/material/TableContainer";
 import TableHead from "@mui/material/TableHead";
 import TableRow from "@mui/material/TableRow";
-import OverallInventory from "./OverallInventory";
-import AddProductModal from "../../../Components/MasterComponnets/AddProductModal/AddProductModal";
+import { HeaderTable } from "../../../Components/MasterComponnets/InventoryAndOrders/Text";
 import { Link } from "react-router-dom";
 import Pagination from "../../../Components/MasterComponnets/Pagination/Pagination";
-import { HeaderTable } from "../../../Components/MasterComponnets/InventoryAndOrders/Text";
+export default function Orders() {
 
-export default function Inventory() {
+
   const rows = Array.from({ length: 9 }, (_, index) => ({
     Products: `Product ${index + 1}`,
-    Price: `₹ ${(index + 1) * 10}`,
+    OrderValue: `₹ ${(index + 1) * 10}`,
     Quantity: 30 - index,
-    ThresholdValue: 12 - index,
-    ExpiryDate: "21/12/22",
-    Availability: "inStock",
+    OrderId: 12 - index,
+    ExpectedDelivery: "21/12/22",
+    Status: "Confirmed",
   }));
 
   const cellStyle = {
@@ -27,10 +27,12 @@ export default function Inventory() {
     fontFamily: "Inter, serif",
   };
 
+
   return (
     <>
       <Stack spacing={3} sx={{ py: 3, ps: "16px", mx: 2 }}>
-        <OverallInventory />
+        <OverAllOrders />
+
         <Box
           sx={{
             backgroundColor: "#FFFFFF",
@@ -46,10 +48,9 @@ export default function Inventory() {
               paddingInline: "16px",
             }}
           >
-          <HeaderTable headerTable="Products" /> 
-            <AddProductModal />
+            <HeaderTable headerTable="Orders" />
 
-            {/* <Button
+            <Button
               type="submit"
               sx={{
                 backgroundColor: "#1366D9",
@@ -62,7 +63,7 @@ export default function Inventory() {
               variant="contained"
             >
               Add Product
-            </Button> */}
+            </Button>
           </Box>
           <TableContainer component={"table"}>
             <Table sx={{ minWidth: 660 }} aria-label="simple table">
@@ -70,19 +71,19 @@ export default function Inventory() {
                 <TableRow>
                   <TableCell sx={cellStyle}>Products</TableCell>
                   <TableCell sx={cellStyle} align="left">
-                    Buying Price
+                    Order Value
                   </TableCell>
                   <TableCell sx={cellStyle} align="left">
                     Quantity
                   </TableCell>
                   <TableCell sx={cellStyle} align="left">
-                    Threshold Value
+                   Order Id
                   </TableCell>
                   <TableCell sx={cellStyle} align="left">
-                    Expiry Date
+                  Expected Delivery
                   </TableCell>
                   <TableCell sx={cellStyle} align="left">
-                    Availability
+                    Status
                   </TableCell>
                 </TableRow>
               </TableHead>
@@ -103,11 +104,11 @@ export default function Inventory() {
                         {row.Products}
                       </Link>
                     </TableCell>
-                    <TableCell align="left">{row.Price}</TableCell>
+                    <TableCell align="left">{row.OrderValue}</TableCell>
                     <TableCell align="left">{row.Quantity} Packets</TableCell>
-                    <TableCell align="left">{row.ThresholdValue}</TableCell>
-                    <TableCell align="left">{row.ExpiryDate}</TableCell>
-                    <TableCell align="left">{row.Availability}</TableCell>
+                    <TableCell align="left">{row.OrderId}</TableCell>
+                    <TableCell align="left">{row.ExpectedDelivery}</TableCell>
+                    <TableCell align="left">{row.Status}</TableCell>
                   </TableRow>
                 ))}
               </TableBody>
@@ -115,6 +116,8 @@ export default function Inventory() {
           </TableContainer>
           <Pagination />
         </Box>
+
+
       </Stack>
     </>
   );

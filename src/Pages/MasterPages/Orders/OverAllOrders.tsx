@@ -5,26 +5,26 @@ import {
   FirstColumn,
 } from "../../../Components/MasterComponnets/InventoryAndOrders/Card";
 
-export default function OverallInventory() {
+export default function OverAllOrders() {
   return (
     <>
       <Box
         sx={{
           backgroundColor: "#FFFFFF",
+
           borderRadius: "8px",
           p: "16px",
         }}
       >
-       <HeaderComponent Header="Overall Inventory" /> 
-
+        <HeaderComponent Header="Overall Orders" />
         <Grid2 container>
           <Grid2
             size={{ xs: 12, md: 2 }}
             sx={{ borderRight: { xs: "none", md: "1px solid #F0F1F3" } }}
           >
             <FirstColumn
-              headerText="Categories"
-              number="14"
+              headerText="Total Orders"
+              number="37"
               lastText="Last 7 days"
             />
           </Grid2>
@@ -38,8 +38,8 @@ export default function OverallInventory() {
           >
             <CardComponent
               colorProp="#E19133"
-              headerCard="Total Products"
-              firNumber="868"
+              headerCard="Total Received"
+              firNumber="32"
               secNumber="₹25000"
               firstText="Last 7 days"
               secText="Revenue"
@@ -55,8 +55,8 @@ export default function OverallInventory() {
           >
             <CardComponent
               colorProp="#845EBC"
-              headerCard="Top Selling"
-              firNumber="868"
+              headerCard="Total Returned"
+              firNumber="5"
               secNumber="₹2500"
               firstText="Last 7 days"
               secText="Cost"
@@ -68,11 +68,11 @@ export default function OverallInventory() {
           >
             <CardComponent
               colorProp="#F36960"
-              headerCard="Low Stocks"
+              headerCard="On the way"
               firNumber="12"
               firstText="Ordered"
-              secNumber="22"
-              secText="Not in stock"
+              secNumber="₹2356"
+              secText="Cost"
             />
           </Grid2>
         </Grid2>
