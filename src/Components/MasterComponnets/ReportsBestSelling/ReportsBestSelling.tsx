@@ -1,5 +1,5 @@
 import {
-    Box,
+  Box,
   Button,
   Stack,
   Table,
@@ -35,7 +35,18 @@ export default function ReportsBestSelling() {
       </Stack>
       <Box>
         <TableContainer>
-          <Table aria-label="simple table">
+          <Table
+            aria-label="Best selling category"
+            sx={{
+              fontSize: {
+                xs: "0.5rem",
+                sm: "1rem",
+                md: "1.125rem",
+                lg: "1.25rem",
+                xl: "1.5rem",
+              },
+            }}
+          >
             <TableHead>
               <TableRow>
                 <TableCell
