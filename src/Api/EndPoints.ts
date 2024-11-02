@@ -19,3 +19,9 @@ export const AUTHENTICATION_URLS = {
   changePassword: `/users/change-password`,
   resetPassword: `${baseURL}/users/resetpassword`,
 };
+
+export const PRODUCTS_URLS = {
+  GetAllProducts: `${baseURL}/products`,
+  AddNewProduct: `${baseURL}/products`,
+  delete: (id: number) => `${baseURL}/products/${id}`,
+};
