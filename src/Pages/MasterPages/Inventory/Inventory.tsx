@@ -10,6 +10,8 @@ import AddProductModal from "../../../Components/MasterComponnets/AddProductModa
 import { Link } from "react-router-dom";
 import Pagination from "../../../Components/MasterComponnets/Pagination/Pagination";
 import { HeaderTable } from "../../../Components/MasterComponnets/InventoryAndOrders/Text";
+import { apiClient, PRODUCTS_URLS } from "../../../Api/EndPoints";
+import { useEffect, useState } from "react";
 
 export default function Inventory() {
   const rows = Array.from({ length: 9 }, (_, index) => ({
@@ -26,7 +28,23 @@ export default function Inventory() {
     fontWeight: 500,
     fontFamily: "Inter, serif",
   };
+const [productList, setProductList] = useState([])
 
+  let getAllProduct = async ()=> {
+    try {
+      let response = await apiClient.get(PRODUCTS_URLS.GetAllProducts)
+      console.log(response.data.data)
+      
+    } catch (error) {
+      
+
+    }
+  }
+
+  useEffect(() => {
+    getAllProduct()
+  }, [])
+  
   return (
     <>
       <Stack spacing={3} sx={{ py: 3, ps: "16px", mx: 2 }}>
