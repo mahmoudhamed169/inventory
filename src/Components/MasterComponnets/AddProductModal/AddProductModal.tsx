@@ -8,6 +8,11 @@ import { FormTextField } from "../../AuthComponents/FormTextField/FormTextField"
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useDropzone } from "react-dropzone";
 import ButtonForm from "../../AuthComponents/ButtonForm/ButtonForm";
+import ImageDropzone from "./ImageDropzone";
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { apiClient, PRODUCTS_URLS } from "../../../Api/EndPoints";
+import { IResponse } from "../../../Interfaces/Interfaces";
 
 const style = {
   position: "absolute",
@@ -31,6 +36,7 @@ export default function AddProductModal() {
     setFocus,
     formState: { errors, isSubmitting },
     reset,
+    control,
   } = useForm();
 
   const handleOpen = () => setOpen(true);
@@ -43,8 +49,52 @@ export default function AddProductModal() {
     setFocus("ProductName");
   }, [setFocus]);
 
+  const appendToFormData = (data) => {
+    const formData = new FormData();
+
+    const expiryDate = new Date(data.ExpiryDate);
+    formData.append("Name", data.Name);
+    formData.append("Category", data.Category);
+
+    const priceValue = parseFloat(data.Price).toFixed(1);
+    formData.append("Price", priceValue);
+
+    formData.append("Quantity", data.Quantity);
+    formData.append("Unit", data.Unit);
+    formData.append("ExpiryDate", expiryDate.toISOString());
+    formData.append("Threshold", data.Threshold);
+    formData.append("Image", data.Image[0]);
+
+    return formData; // Return the FormData object
+  };
+
   const onSubmit: SubmitHandler = async (data) => {
-    console.log("Form Data:", data);
+    const toastId = toast.loading("Processing...");
+    const productData = appendToFormData(data);
+    console.log(data);
+    console.log(productData);
+
+    try {
+      const response = await apiClient.post<IResponse>(
+        PRODUCTS_URLS.AddNewProduct,
+        productData
+      );
+
+      if (response.data.isSuccess) {
+        toast.success("Product is added successfully", {
+          id: toastId,
+        });
+      } else {
+        toast.error(response.data.message, {
+          id: toastId,
+        });
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message: string }>;
+      const errorMessage =
+        axiosError.response?.data?.message || "An error occurred";
+      toast.error(errorMessage, { id: toastId });
+    }
 
     handleClose();
   };
@@ -89,7 +139,7 @@ export default function AddProductModal() {
             <Stack spacing={1.7}>
               {/* Form fields for product details */}
 
-              <Box
+              {/* <Box
                 sx={{ display: "flex", justifyContent: "center", gap: "20px" }}
               >
                 <Box
@@ -116,40 +166,48 @@ export default function AddProductModal() {
                     <span style={{ color: "#448DF2" }}>Browse image</span>
                   </Typography>
                 </Box>
+              </Box> */}
+
+              <Box sx={{ display: "flex", justifyContent: "center" }}>
+                <ImageDropzone
+                  control={control}
+                  name="Image"
+                  rules={{ required: "Image is required" }}
+                />
               </Box>
               <FormTextFieldWithLabel
                 label="Product Name"
-                name="ProductName"
+                name="Name"
                 placeholder="Enter Product Name"
                 register={register}
-                errors={errors.ProductName}
+                errors={errors.Name}
                 rules={{ required: "Product Name is required" }}
               />
 
-              <FormTextFieldWithLabel
+              {/* <FormTextFieldWithLabel
                 label="Product ID"
                 name="ProductId"
                 placeholder="Enter Product ID"
                 register={register}
                 errors={errors.ProductId}
                 rules={{ required: "Product ID is required" }}
-              />
+              /> */}
 
               <FormTextFieldWithLabel
                 label="Category"
-                name="category"
+                name="Category"
                 placeholder="Enter Category"
                 register={register}
-                errors={errors.category}
+                errors={errors.Category}
                 rules={{ required: "Category is required" }}
               />
 
               <FormTextFieldWithLabel
                 label="Buying Price"
-                name="BuyingPrice"
+                name="Price"
                 placeholder="Enter Buying Price"
                 register={register}
-                errors={errors.BuyingPrice}
+                errors={errors.Price}
                 rules={{ required: "Buying Price is required" }}
               />
 
@@ -170,7 +228,6 @@ export default function AddProductModal() {
                 register={register}
                 errors={errors.Unit}
                 rules={{ required: "Unit is required" }}
-                type="number"
               />
 
               <FormTextFieldWithLabel
@@ -185,10 +242,10 @@ export default function AddProductModal() {
 
               <FormTextFieldWithLabel
                 label="Threshold Value"
-                name="ThresholdValue"
+                name="Threshold"
                 placeholder="Enter Threshold Value"
                 register={register}
-                errors={errors.ThresholdValue}
+                errors={errors.Threshold}
                 rules={{ required: "Threshold Value is required" }}
               />
 
