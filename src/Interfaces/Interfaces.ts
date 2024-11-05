@@ -26,3 +26,9 @@ export interface RegisterRequest {
   confirmPassword: string;
   email: string;
 }
+export interface IResponse {
+  isSuccess: boolean;
+  data: string;
+  message: string;
+  errorCode: number;
+}
