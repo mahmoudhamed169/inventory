@@ -46,13 +46,19 @@ export default function Login() {
         AUTHENTICATION_URLS.login,
         data
       );
-      await toast.success("Login Successfully", {
-        id: toastId,
-      });
+
+      console.log(response);
       if (response.data.isSuccess) {
-        await localStorage.setItem("token", response.data.data);
+        localStorage.setItem("token", response.data.data);
         saveUserData();
         navigate("/home/dashboard");
+        toast.success("Login Successfully", {
+          id: toastId,
+        });
+      } else {
+        toast.error(response.data.message, {
+          id: toastId,
+        });
       }
     } catch (error) {
       const axiosError = error as AxiosError<{ message: string }>;
