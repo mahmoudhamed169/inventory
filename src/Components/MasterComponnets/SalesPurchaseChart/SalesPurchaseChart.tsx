@@ -48,11 +48,18 @@ const barChartsParams: BarChartProps = {
       ],
       scaleType: "band",
       id: "axis1",
+      categoryGapRatio: 0.5,
     },
   ],
   height: 400,
   slotProps: {
-    bar: { style: { width: "15px" } },
+    bar: {
+      style: {
+        width: "15px",
+
+        clipPath: "inset(0 0 0 0 round 8px 8px 0 0)", // Top corners rounded only
+      },
+    },
   },
 };
 
