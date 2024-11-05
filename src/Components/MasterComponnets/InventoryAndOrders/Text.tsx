@@ -36,6 +36,7 @@ export const HeaderTable = ({ headerTable }: HeaderTable) => {
           fontWeight: "500",
           fontFamily: "Inter, serif",
           color: "#383E49",
+        
         }}
       >
         {headerTable}
