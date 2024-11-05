@@ -99,12 +99,39 @@ export default function Inventory() {
           >
             <Grid2 container>
               <Grid2 size={{ xs: 12, md: 1 }}>
-                <Box sx={{ mt: 1, py: { xs: 2, md: 0 } }}>
-                  <HeaderTable headerTable="Products" />
-                </Box>
+       
               </Grid2>
               <Grid2 size={{ xs: 12, md: 5 }}>
+                
+              </Grid2>
+              <Grid2 size={{ xs: 12, md: 1 }}>
+            
+              </Grid2>
+
+              <Grid2 size={{ xs: 12, md: 5 }}>
                 <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: { xs: "flex-start", md: "flex-end" },
+                  }}
+                >
+               
+                </Box>
+              </Grid2>
+            </Grid2>
+
+
+            <Box sx={{display:'flex' , justifyContent:{xs:"start",md:"space-between"}, flexDirection:{xs:"column",md:"row"}}}>
+
+
+              <Box sx={{ mt: 1, py: { xs: 2, md: 0 } }}>
+                  <HeaderTable headerTable="Products" />
+                </Box>
+
+
+
+              <Box sx={{display:"flex" ,gap:2, flexDirection:{xs:"column",md:"row"}}}>
+                     <Box
                   sx={{
                     "& .MuiTextField-root": { width: "45ch" },
                     display: "flex",
@@ -124,27 +151,26 @@ export default function Inventory() {
                       type="text"
                       placeholder="Search by Name ..."
                       onChange={getNameValue}
-                         label="Search by Name"
+                       
                     />
                   </Box>
                 </Box>
-              </Grid2>
-              <Grid2 size={{ xs: 12, md: 1 }}>
-                <Box
-                  sx={{ minWidth: 120, maxWidth: 360, my: { xs: 2, md: 0 } }}
+
+                    <Box
+                  sx={{ minWidth: 150, maxWidth: 360, my: { xs: 2, md: 0 } }}
                 >
                   <FormControl fullWidth>
                     <InputLabel id="demo-simple-select-label">
                       Filters
                     </InputLabel>
                     <Select
-                      labelId="demo-simple-select-label"
-                      id="demo-simple-select"
-                      label="Filters"
+                           labelId="demo-simple-select-label"
+                           id="demo-simple-select"
+                           label="Filters"
                       onChange={getAvailabilityValue}
                       sx={{
                         ".css-w76bbz-MuiSelect-select-MuiInputBase-input-MuiOutlinedInput-input":
-                          { padding: "11px  14px 16px 14px" },
+                          { padding: "12px  14px 16px 14px" },
                       }}
                     >
                       <MenuItem value={0}>In Stock</MenuItem>
@@ -153,20 +179,17 @@ export default function Inventory() {
                     </Select>
                   </FormControl>
                 </Box>
-              </Grid2>
 
-              <Grid2 size={{ xs: 12, md: 5 }}>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: { xs: "flex-start", md: "flex-end" },
-                  }}
-                >
-                  <AddProductModal />
-                </Box>
-              </Grid2>
-            </Grid2>
+                
+   <AddProductModal />
+
+              </Box>
+
+
+            </Box>
           </Box>
+
+
 
           <TableContainer component={"table"}>
             <Table sx={{ minWidth: 660 }} aria-label="simple table">
