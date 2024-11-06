@@ -21,6 +21,7 @@ import { HeaderTable } from "../../../Components/MasterComponnets/InventoryAndOr
 import { apiClient, PRODUCTS_URLS } from "../../../Api/EndPoints";
 import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
+import NoData from "../../../Components/shared/ProtectedRoute/NoData/NoData";
 
 export default function Inventory() {
   const cellStyle = {
@@ -123,7 +124,7 @@ export default function Inventory() {
                 <HeaderTable headerTable="Products" />
               </Box>
 
-              <Bo
+              <Box
                 sx={{
                   display: "flex",
                   gap: 2,
@@ -179,11 +180,12 @@ export default function Inventory() {
                 </Box>
 
                 <AddProductModal />
-              </Bo            </Box>
+              </Box>
+            </Box>
           </Box>
 
           <TableContainer component={"table"}>
-            <Table sx={{ minWidth: 660 }} aria-label="simple table">
+            <Table sx={{ minWidth: 660 }} aria-label="caption table">
               <TableHead>
                 <TableRow>
                   <TableCell
@@ -224,84 +226,90 @@ export default function Inventory() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {productList && productList.length > 0
-                  ? productList.map((row: any) => (
-                      <TableRow
-                        key={row?.id}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
+                {productList && productList.length > 0 ? (
+                  productList.map((row: any) => (
+                    <TableRow
+                      key={row?.id}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        sx={{ fontSize: { xs: "12px", md: "14px" } }}
                       >
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          sx={{ fontSize: { xs: "12px", md: "14px" } }}
-                        >
-                          <Link
-                            to={"/home/profuct-info"}
-                            style={{
-                              textDecoration: "none",
-                              color: "#48505E",
-                            }}
-                          >
-                            {row?.name}
-                          </Link>
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: { xs: "12px", md: "14px" },
+                        <Link
+                          to={"/home/profuct-info"}
+                          style={{
+                            textDecoration: "none",
                             color: "#48505E",
                           }}
-                          align="left"
                         >
-                          ₹{row?.price}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: { xs: "12px", md: "14px" },
-                            color: "#48505E",
-                          }}
-                          align="left"
-                        >
-                          {row?.quantity} Packets
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: { xs: "12px", md: "14px" },
-                            color: "#48505E",
-                          }}
-                          align="left"
-                        >
-                          {row?.threshold}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: { xs: "12px", md: "14px" },
-                            color: "#48505E",
-                          }}
-                          align="left"
-                        >
-                          {new Date(row?.expiryDate).toLocaleDateString()}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            color:
-                              row?.available === "InStock"
-                                ? "#10A760"
-                                : row?.available === "OutOfStock"
-                                ? "#DA3E33"
-                                : row?.available === "LowStock"
-                                ? "#E19133"
-                                : "inherit",
-                            fontSize: { xs: "12px", md: "14px" },
-                          }}
-                          align="left"
-                        >
-                          {row?.available}
-                        </TableCell>
-                      </TableRow>
-                    ))
-                  : ""}
+                          {row?.name}
+                        </Link>
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: { xs: "12px", md: "14px" },
+                          color: "#48505E",
+                        }}
+                        align="left"
+                      >
+                        ₹{row?.price}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: { xs: "12px", md: "14px" },
+                          color: "#48505E",
+                        }}
+                        align="left"
+                      >
+                        {row?.quantity} Packets
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: { xs: "12px", md: "14px" },
+                          color: "#48505E",
+                        }}
+                        align="left"
+                      >
+                        {row?.threshold}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: { xs: "12px", md: "14px" },
+                          color: "#48505E",
+                        }}
+                        align="left"
+                      >
+                        {new Date(row?.expiryDate).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color:
+                            row?.available === "InStock"
+                              ? "#10A760"
+                              : row?.available === "OutOfStock"
+                              ? "#DA3E33"
+                              : row?.available === "LowStock"
+                              ? "#E19133"
+                              : "inherit",
+                          fontSize: { xs: "12px", md: "14px" },
+                        }}
+                        align="left"
+                      >
+                        {row?.available}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={6}>
+                      <NoData />
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </TableContainer>

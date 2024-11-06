@@ -70,8 +70,8 @@ export default function OverallInventory() {
               colorProp="#F36960"
               headerCard="Low Stocks"
               firNumber="12"
-              firstText="Ordered"
               secNumber="22"
+              firstText="Ordered"
               secText="Not in stock"
             />
           </Grid2>
