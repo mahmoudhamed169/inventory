@@ -36,7 +36,7 @@ export default function Inventory() {
   const [nameValue, setNameValue] = useState("");
   const [availabilityValue, setAvailabilityValue] = useState();
   let getAllProduct = async (
-    pageNumber: number,
+    page: number,
     pageSize: number,
     nameInput: string,
     available?: number | string
@@ -44,16 +44,16 @@ export default function Inventory() {
     try {
       let response = await apiClient.get(PRODUCTS_URLS.GetAllProducts, {
         params: {
-          PageNumbar: pageNumber,
+          PageNumbar: page,
           PageSize: pageSize,
           Name: nameInput,
           Available: available,
         },
       });
-      console.log(response.data);
+      console.log(response.data.data.totalNumber);
 
-      setProductList(response.data.data);
-      // setTotalPages(Math.ceil(response.data. / pageSize));
+      setProductList(response.data.data.items);
+      // setTotalPages(Math.ceil(response.data.data.totalNumber / pageSize));
     } catch (error) {
       console.log(error);
     }
@@ -63,22 +63,19 @@ export default function Inventory() {
   //   getAllProduct(pageSize, page);
   // }, [page, pageSize]);
   useEffect(() => {
-    getAllProduct(1, 9, "");
-  }, []);
+    getAllProduct(page,pageSize,"");
+  }, [page,pageSize]);
 
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
-    setPage(value);
+  const handleChangePage = (_event: React.ChangeEvent<unknown>, newPage: number) => {
+    setPage(newPage);
   };
   const getNameValue = (input: any) => {
     setNameValue(input.target.value);
-    getAllProduct(1, 9, input.target.value, availabilityValue);
+    getAllProduct(page, pageSize, input.target.value, availabilityValue);
   };
   const getAvailabilityValue = (input: any) => {
     setAvailabilityValue(input.target.value);
-    getAllProduct(1, 9, nameValue, input.target.value);
+    getAllProduct(page, pageSize,nameValue, input.target.value);
   };
 
   return (
@@ -314,9 +311,10 @@ export default function Inventory() {
             </Table>
           </TableContainer>
           <Pagination
-          // count={totalPages}
-          // page={page}
-          // onChange={handlePageChange}
+          //  count={totalPages}
+          //  page={page}
+          //  onPageChange={handleChangePage}
+        
           />
         </Box>
       </Stack>
