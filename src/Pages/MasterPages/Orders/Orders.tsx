@@ -9,9 +9,8 @@ import TableRow from "@mui/material/TableRow";
 import { HeaderTable } from "../../../Components/MasterComponnets/InventoryAndOrders/Text";
 import { Link } from "react-router-dom";
 import Pagination from "../../../Components/MasterComponnets/Pagination/Pagination";
+import AddOrderModal from "../../../Components/MasterComponnets/AddOrderModal/AddOrderModal";
 export default function Orders() {
-
-
   const rows = Array.from({ length: 9 }, (_, index) => ({
     Products: `Product ${index + 1}`,
     OrderValue: `₹ ${(index + 1) * 10}`,
@@ -26,7 +25,6 @@ export default function Orders() {
     fontWeight: 500,
     fontFamily: "Inter, serif",
   };
-
 
   return (
     <>
@@ -50,7 +48,7 @@ export default function Orders() {
           >
             <HeaderTable headerTable="Orders" />
 
-            <Button
+            {/* <Button
               type="submit"
               sx={{
                 backgroundColor: "#1366D9",
@@ -63,7 +61,9 @@ export default function Orders() {
               variant="contained"
             >
               Add Product
-            </Button>
+            </Button> */}
+
+            <AddOrderModal />
           </Box>
           <TableContainer component={"table"}>
             <Table sx={{ minWidth: 660 }} aria-label="simple table">
@@ -77,10 +77,10 @@ export default function Orders() {
                     Quantity
                   </TableCell>
                   <TableCell sx={cellStyle} align="left">
-                   Order Id
+                    Order Id
                   </TableCell>
                   <TableCell sx={cellStyle} align="left">
-                  Expected Delivery
+                    Expected Delivery
                   </TableCell>
                   <TableCell sx={cellStyle} align="left">
                     Status
@@ -116,8 +116,6 @@ export default function Orders() {
           </TableContainer>
           <Pagination />
         </Box>
-
-
       </Stack>
     </>
   );
