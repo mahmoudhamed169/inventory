@@ -73,13 +73,23 @@ export const CardComponent = ({
           {headerCard}
         </Typography>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: { xs: "start", md: "space-between" },
+           
+          }}
+        >
           <Typography
             variant="body1"
             sx={{
               color: "#5D6679",
               fontWeight: 600,
               fontFamily: "Inter, serif",
+              minWidth:"30%",
+             
+            
+             
             }}
           >
             {firNumber}
@@ -90,19 +100,31 @@ export const CardComponent = ({
               color: "#5D6679",
               fontWeight: 600,
               fontFamily: "Inter, serif",
+              
+              
             }}
           >
             {secNumber}
           </Typography>
         </Box>
 
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: { xs: "flex-start", md: "space-between" },
+    
+           
+          }}
+        >
           <Typography
             variant="body1"
             sx={{
               color: "#858D9D",
               fontSize: "14px",
               fontFamily: "Inter, serif",
+              minWidth:"30%",
+            
+              
             }}
           >
             {firstText}
@@ -113,6 +135,7 @@ export const CardComponent = ({
               color: "#858D9D",
               fontSize: "14px",
               fontFamily: "Inter, serif",
+          
             }}
           >
             {secText}
