@@ -1,21 +1,18 @@
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import { Typography, useMediaQuery } from "@mui/material";
+import { LogOutIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Typography, useMediaQuery } from "@mui/material";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import InventoryIcone from "../../../Icones/InventoryIcone";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
-import FactCheckIcon from "@mui/icons-material/FactCheck";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import LogoutIcon from "@mui/icons-material/Logout";
 import LogoIcone from "../../../Icones/LogoIcone";
-import HomeIcone from "../../../Icones/HomeIcone";
-import ReportSideBarIcone from "../../../Icones/ReportSideBarIcone";
-import SuppliersSideBarIcone from "../../../Icones/SuppliersSideBarIcone";
-import OrdersSideBarIcone from "../../../Icones/OrdersSideBarIcone";
-import ListSideBarIcone from "../../../Icones/ListSideBarIcone";
+import {
+  HomeIcon,
+  InventoryIcon,
+  ManageStoreIcon,
+  OrdersIcon,
+  ReportIcon,
+  SuppliersIcon,
+} from "../../../Icones/SideBarIcons";
 
 export default function SideBar() {
   const navigate = useNavigate();
@@ -78,43 +75,43 @@ export default function SideBar() {
         </MenuItem>
         <MenuItem
           component={<Link to="/home/dashboard" />}
-          icon={<HomeIcone />}
+          icon={<HomeIcon />}
           className={getMenuItemClassName("/home/dashboard")}
         >
           Dashboard
         </MenuItem>
         <MenuItem
           component={<Link to="/home/inventory" />}
-          icon={<InventoryIcone />}
-          className={getMenuItemClassName("/inventory")}
+          icon={<InventoryIcon />}
+          className={getMenuItemClassName("/home/inventory")}
         >
           Inventory
         </MenuItem>
         <MenuItem
           component={<Link to="/home/reports" />}
-          icon={<ReportSideBarIcone />}
+          icon={<ReportIcon />}
           className={getMenuItemClassName("/home/reports")}
         >
           Reports
         </MenuItem>
         <MenuItem
           component={<Link to="/home/suppliers" />}
-          icon={<SuppliersSideBarIcone />}
+          icon={<SuppliersIcon />}
           className={getMenuItemClassName("/home/suppliers")}
         >
           Suppliers
         </MenuItem>
         <MenuItem
           component={<Link to="/home/orders" />}
-          icon={<OrdersSideBarIcone />}
-          className={getMenuItemClassName("/orders")}
+          icon={<OrdersIcon />}
+          className={getMenuItemClassName("/home/orders")}
         >
           Orders
         </MenuItem>
         <MenuItem
           component={<Link to="/home/manage-store" />}
-          icon={<ListSideBarIcone />}
-          className={getMenuItemClassName("/manage-store")}
+          icon={<ManageStoreIcon />}
+          className={getMenuItemClassName("/home/manage-store")}
         >
           Manage Store
         </MenuItem>
@@ -124,13 +121,13 @@ export default function SideBar() {
         <MenuItem
           component={<Link to="/home/settings" />}
           icon={<SettingsOutlinedIcon />}
-          className={getMenuItemClassName("/settings")}
+          className={getMenuItemClassName("/home")}
         >
           Settings
         </MenuItem>
         <MenuItem
           component={<Link to="/login" />}
-          icon={<LogoutIcon />}
+          icon={<LogOutIcon />}
           onClick={() => {
             localStorage.removeItem("token");
             navigate("/login");
