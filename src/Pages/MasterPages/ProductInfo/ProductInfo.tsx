@@ -1,40 +1,75 @@
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { PRODUCTS_URLS, apiClient } from "../../../Api/EndPoints";
 import TableForProductInfo from "../../../Components/MasterComponnets/TableForProductInfo/TableForProductInfo";
-import productImge from "../../../assets/Product-info-img.png";
+import { productInfoResponse } from "../../../Interfaces/ProductInfoResponse/ProductInfoResponse";
+import { RowData } from "../../../Interfaces/TableForProductInfo.interface/TableForProductInfo.interface";
 import Styles from "./ProductInfo.module.css";
-
-function createData(name: string, Data: string) {
-  return { name, Data };
-}
-
-const rows = {
-  row1: [
-    createData("Product name", "Maggi"),
-    createData("Product ID", "456567"),
-    createData("Product category", "Instant food"),
-    createData("Expiry Date", "13/4/23"),
-    createData("Threshold Value", "12"),
-  ],
-  row2: [
-    createData("Supplier name", "Ronald Martin"),
-    createData("Contact Number", "98789 86757"),
-  ],
-  row3: [
-    createData("Opening Stock", "40"),
-    createData("Remaining Stock", "34"),
-    createData("On the way", "15"),
-    createData("Threshold value", "12"),
-  ],
-  row4: [
-    createData("Opening Stock", "40"),
-    createData("Remaining Stock", "34"),
-    createData("On the way", "15"),
-    createData("Threshold value", "12"),
-  ],
-};
+import { AxiosError } from "axios";
+import toast from "react-hot-toast";
+import { rows } from "./ProductInfoData";
 
 export default function ProductInfo() {
+  const location = useLocation();
+  const productId = location.state?.productId;
+  const navigate = useNavigate();
+
+  const [listOfProductInfoData, setlLstOfProductInfoData] =
+    useState<productInfoResponse | null>(null);
+
+  const getProductInfoData = async () => {
+    try {
+      const response = await apiClient.get(
+        PRODUCTS_URLS.getProductByID(productId)
+      );
+      setlLstOfProductInfoData(response.data.data);
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message: string }>;
+      const errorMessage =
+        axiosError.response?.data?.message || "An error occurred";
+      toast.error(errorMessage);
+    }
+  };
+
+  useEffect(() => {
+    getProductInfoData();
+  }, []);
+
+  const rowData: RowData[] = [
+    {
+      name: "Product name",
+      Data: listOfProductInfoData?.name || "No Data to Show",
+    },
+    { name: "Product ID", Data: productId?.toString() || "No Data to Show" },
+    {
+      name: "Product category",
+      Data: listOfProductInfoData?.categoryName || "No Data to Show",
+    },
+    {
+      name: "Expiry Date",
+      Data: listOfProductInfoData?.expiryDate.slice(0, 10) || "No Data to Show",
+    },
+    {
+      name: "Threshold Value",
+      Data: (listOfProductInfoData?.threshold ?? 0).toString(),
+    },
+  ];
+
+  const rowData2: RowData[] = [
+    {
+      name: "Product Price",
+      Data: listOfProductInfoData?.price || "No Data to Show",
+    },
+    {
+      name: "Product Quantity",
+      Data: listOfProductInfoData?.quantity || "No Data to Show",
+    },
+    { name: "On the way", Data: "15" },
+  ];
+
   return (
     <Box
       sx={{
@@ -52,6 +87,20 @@ export default function ProductInfo() {
           borderRadius: "0.5rem",
         }}
       >
+        <Button
+          onClick={() => navigate(-1)}
+          sx={{
+            "&:hover": {
+              backgroundColor: "transparent",
+            },
+            fontSize: { xs: ".8rem", sm: ".9rem", md: "1rem" },
+            display: "flex",
+            justifyContent: "start",
+          }}
+        >
+          <ArrowBackIosIcon style={{ fontWeight: 300, fontSize: "16px" }} />
+          Back
+        </Button>
         {/* --------------- Header Section with Title and Action Buttons--------------- */}
         <Stack
           sx={{
@@ -59,12 +108,13 @@ export default function ProductInfo() {
             justifyContent: { xs: "center", md: "space-between" },
             alignItems: "center",
             gap: { xs: "10px", md: "0" },
-            paddingBlock: "1rem",
+            paddingBottom: "1rem",
             borderBottom: " 1px solid #F0F1F3",
           }}
           component="div"
         >
           {/* --------------- Title --------------- */}
+
           <Box component="div">
             <Typography
               variant="h5"
@@ -102,10 +152,10 @@ export default function ProductInfo() {
             {/* --------------- Primary & Supplier Details --------------- */}
             <Grid2 size={{ xs: 12, md: 8 }}>
               <Stack spacing={1.5}>
-                <TableForProductInfo title="Primary Details" rows={rows.row1} />
+                <TableForProductInfo title="Primary Details" rows={rowData} />
                 <TableForProductInfo
                   title="Supplier Details"
-                  rows={rows.row2}
+                  rows={rows.rowName}
                 />
               </Stack>
             </Grid2>
@@ -117,7 +167,7 @@ export default function ProductInfo() {
               >
                 <img
                   className={Styles["product-imge"]}
-                  src={productImge}
+                  src={listOfProductInfoData?.imageUrl}
                   alt="product-imge"
                 />
               </Box>
@@ -128,7 +178,7 @@ export default function ProductInfo() {
                   justifyContent: "center",
                 }}
               >
-                <TableForProductInfo rows={rows.row3} />
+                <TableForProductInfo rows={rowData2} />
               </Box>
             </Grid2>
 
@@ -137,7 +187,7 @@ export default function ProductInfo() {
               <Stack>
                 <TableForProductInfo
                   title="Stock Locations"
-                  rows={rows.row4}
+                  rows={rows.rowBranch}
                   Stock={true}
                 />
               </Stack>
