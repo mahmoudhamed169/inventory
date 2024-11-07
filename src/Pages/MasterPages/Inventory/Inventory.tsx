@@ -242,6 +242,7 @@ export default function Inventory() {
                             textDecoration: "none",
                             color: "#48505E",
                           }}
+                          state={{ productId: row.id }}
                         >
                           {row?.name}
                         </Link>
