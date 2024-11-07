@@ -1,18 +1,24 @@
 import { Box, Grid } from "@mui/material";
-import { Outlet } from "react-router-dom";
-import AuthPageTitle from "../../Utils/AuthPageTitle";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
 import AuthBackground from "../../Components/AuthComponents/AuthBackGround/AuthBackGround";
-import { useEffect, useState } from "react";
 import MainLoading from "../../Components/MainLoading/MainLoading";
 import { useLoading } from "../../Context/LoadingContext/LoadingContext";
+import AuthPageTitle from "../../Utils/AuthPageTitle";
 
 export default function AuthLayout() {
   const { loading, setLoading } = useLoading();
-
+  const navigate = useNavigate()
+  
   useEffect(() => {
+    if (localStorage.getItem("token")) {
+      navigate("/home")
+    }
+    
     const timer = setTimeout(() => {
       setLoading(false);
     }, 2000);
+
     return () => {
       clearTimeout(timer);
       setLoading(true);
