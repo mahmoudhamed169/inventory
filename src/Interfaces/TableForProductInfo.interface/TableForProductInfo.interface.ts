@@ -1,10 +1,10 @@
 export interface TableForProductInfoProps {
   title?: string;
-  rows: RowData[];
+  rows: RowData[] ;
   Stock?: boolean;
 }
 
-type RowData  = {
+export type RowData  = {
   name: string;
-  Data: string;
+  Data: string | number;
 };

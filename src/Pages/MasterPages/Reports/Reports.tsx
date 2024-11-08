@@ -18,7 +18,6 @@ export default function Reports() {
             padding: { xs: "15px 20px", sm: "20px 25px", md: "22px 30px" },
             borderRadius: "0.5rem",
             width: "100%",
-            maxWidth: { md: "35rem" },
           }}
         >
           <ReportsOverview />
@@ -32,7 +31,6 @@ export default function Reports() {
             padding: { xs: "15px 20px", sm: "20px 25px", md: "22px 30px" },
             borderRadius: "0.5rem",
             width: "100%",
-            maxWidth: { md: "35rem" },
           }}
         >
           <ReportsBestSelling />

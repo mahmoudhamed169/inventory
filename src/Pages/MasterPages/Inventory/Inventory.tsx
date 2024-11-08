@@ -21,6 +21,7 @@ import { HeaderTable } from "../../../Components/MasterComponnets/InventoryAndOr
 import { apiClient, PRODUCTS_URLS } from "../../../Api/EndPoints";
 import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
+import NoData from "../../../Components/shared/NoData/NoData";
 
 export default function Inventory() {
   const cellStyle = {
@@ -35,7 +36,7 @@ export default function Inventory() {
   const [nameValue, setNameValue] = useState("");
   const [availabilityValue, setAvailabilityValue] = useState();
   let getAllProduct = async (
-    pageNumber: number,
+    page: number,
     pageSize: number,
     nameInput: string,
     available?: number | string
@@ -43,16 +44,16 @@ export default function Inventory() {
     try {
       let response = await apiClient.get(PRODUCTS_URLS.GetAllProducts, {
         params: {
-          PageNumbar: pageNumber,
+          PageNumbar: page,
           PageSize: pageSize,
           Name: nameInput,
           Available: available,
         },
       });
-      console.log(response.data);
+      console.log(response.data.data.totalNumber);
 
-      setProductList(response.data.data);
-      // setTotalPages(Math.ceil(response.data. / pageSize));
+      setProductList(response.data.data.items);
+      // setTotalPages(Math.ceil(response.data.data.totalNumber / pageSize));
     } catch (error) {
       console.log(error);
     }
@@ -62,22 +63,19 @@ export default function Inventory() {
   //   getAllProduct(pageSize, page);
   // }, [page, pageSize]);
   useEffect(() => {
-    getAllProduct(1, 9, "");
-  }, []);
+    getAllProduct(page,pageSize,"");
+  }, [page,pageSize]);
 
-  const handlePageChange = (
-    event: React.ChangeEvent<unknown>,
-    value: number
-  ) => {
-    setPage(value);
+  const handleChangePage = (_event: React.ChangeEvent<unknown>, newPage: number) => {
+    setPage(newPage);
   };
   const getNameValue = (input: any) => {
     setNameValue(input.target.value);
-    getAllProduct(1, 9, input.target.value, availabilityValue);
+    getAllProduct(page, pageSize, input.target.value, availabilityValue);
   };
   const getAvailabilityValue = (input: any) => {
     setAvailabilityValue(input.target.value);
-    getAllProduct(1, 9, nameValue, input.target.value);
+    getAllProduct(page, pageSize,nameValue, input.target.value);
   };
 
   return (
@@ -183,7 +181,7 @@ export default function Inventory() {
           </Box>
 
           <TableContainer component={"table"}>
-            <Table sx={{ minWidth: 660 }} aria-label="simple table">
+            <Table sx={{ minWidth: 660 }} aria-label="caption table">
               <TableHead>
                 <TableRow>
                   <TableCell
@@ -224,91 +222,99 @@ export default function Inventory() {
                 </TableRow>
               </TableHead>
               <TableBody>
-                {productList && productList.length > 0
-                  ? productList.map((row: any) => (
-                      <TableRow
-                        key={row?.id}
-                        sx={{
-                          "&:last-child td, &:last-child th": { border: 0 },
-                        }}
+                {productList && productList.length > 0 ? (
+                  productList.map((row: any) => (
+                    <TableRow
+                      key={row?.id}
+                      sx={{
+                        "&:last-child td, &:last-child th": { border: 0 },
+                      }}
+                    >
+                      <TableCell
+                        component="th"
+                        scope="row"
+                        sx={{ fontSize: { xs: "12px", md: "14px" } }}
                       >
-                        <TableCell
-                          component="th"
-                          scope="row"
-                          sx={{ fontSize: { xs: "12px", md: "14px" } }}
-                        >
-                          <Link
-                            to={"/home/profuct-info"}
-                            style={{
-                              textDecoration: "none",
-                              color: "#48505E",
-                            }}
-                          >
-                            {row?.name}
-                          </Link>
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: { xs: "12px", md: "14px" },
+                        <Link
+                          to={"/home/profuct-info"}
+                          style={{
+                            textDecoration: "none",
                             color: "#48505E",
                           }}
-                          align="left"
+                          state={{ productId: row.id }}
                         >
-                          ₹{row?.price}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: { xs: "12px", md: "14px" },
-                            color: "#48505E",
-                          }}
-                          align="left"
-                        >
-                          {row?.quantity} Packets
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: { xs: "12px", md: "14px" },
-                            color: "#48505E",
-                          }}
-                          align="left"
-                        >
-                          {row?.threshold}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            fontSize: { xs: "12px", md: "14px" },
-                            color: "#48505E",
-                          }}
-                          align="left"
-                        >
-                          {new Date(row?.expiryDate).toLocaleDateString()}
-                        </TableCell>
-                        <TableCell
-                          sx={{
-                            color:
-                              row?.available === "InStock"
-                                ? "#10A760"
-                                : row?.available === "OutOfStock"
-                                ? "#DA3E33"
-                                : row?.available === "LowStock"
-                                ? "#E19133"
-                                : "inherit",
-                            fontSize: { xs: "12px", md: "14px" },
-                          }}
-                          align="left"
-                        >
-                          {row?.available}
-                        </TableCell>
-                      </TableRow>
-                    ))
-                  : ""}
+                          {row?.name}
+                        </Link>
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: { xs: "12px", md: "14px" },
+                          color: "#48505E",
+                        }}
+                        align="left"
+                      >
+                        ₹{row?.price}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: { xs: "12px", md: "14px" },
+                          color: "#48505E",
+                        }}
+                        align="left"
+                      >
+                        {row?.quantity} Packets
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: { xs: "12px", md: "14px" },
+                          color: "#48505E",
+                        }}
+                        align="left"
+                      >
+                        {row?.threshold}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          fontSize: { xs: "12px", md: "14px" },
+                          color: "#48505E",
+                        }}
+                        align="left"
+                      >
+                        {new Date(row?.expiryDate).toLocaleDateString()}
+                      </TableCell>
+                      <TableCell
+                        sx={{
+                          color:
+                            row?.available === "InStock"
+                              ? "#10A760"
+                              : row?.available === "OutOfStock"
+                              ? "#DA3E33"
+                              : row?.available === "LowStock"
+                              ? "#E19133"
+                              : "inherit",
+                          fontSize: { xs: "12px", md: "14px" },
+                        }}
+                        align="left"
+                      >
+                        {row?.available}
+                      </TableCell>
+                    </TableRow>
+                  ))
+                ) : (
+                  <TableRow>
+                    <TableCell colSpan={6}>
+                      <NoData />
+                    </TableCell>
+                  </TableRow>
+                )}
               </TableBody>
             </Table>
           </TableContainer>
           <Pagination
-          // count={totalPages}
-          // page={page}
-          // onChange={handlePageChange}
+          //  count={totalPages}
+          //  page={page}
+          //  onPageChange={handleChangePage}
+        
           />
         </Box>
       </Stack>

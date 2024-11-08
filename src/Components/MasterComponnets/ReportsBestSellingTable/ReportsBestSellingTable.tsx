@@ -11,6 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ProductDataForBestSellingTable } from "../../../Interfaces/TableForReportsBestSellingTable/TableForReportsBestSellingTable";
+import NoData from "../../shared/NoData/NoData";
 
 function createData({
   Product,
@@ -132,11 +133,8 @@ export default function ReportsBestSellingTable() {
           <TableBody>
             {rows.length === 0 ? (
               <TableRow>
-                <TableCell
-                  colSpan={productTableHeaders.length}
-                  sx={{ textAlign: "center" }}
-                >
-                  No data available
+                <TableCell colSpan={6}>
+                  <NoData />
                 </TableCell>
               </TableRow>
             ) : (

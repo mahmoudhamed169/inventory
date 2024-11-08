@@ -1,21 +1,18 @@
+import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
+import { Typography, useMediaQuery } from "@mui/material";
+import { LogOutIcon } from "lucide-react";
 import { useEffect, useState } from "react";
 import { Menu, MenuItem, Sidebar } from "react-pro-sidebar";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { Typography, useMediaQuery } from "@mui/material";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
-import InventoryIcone from "../../../Icones/InventoryIcone";
-import BarChartOutlinedIcon from "@mui/icons-material/BarChartOutlined";
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
-import Inventory2OutlinedIcon from "@mui/icons-material/Inventory2Outlined";
-import FactCheckIcon from "@mui/icons-material/FactCheck";
-import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import LogoutIcon from "@mui/icons-material/Logout";
 import LogoIcone from "../../../Icones/LogoIcone";
-import HomeIcone from "../../../Icones/HomeIcone";
-import ReportSideBarIcone from "../../../Icones/ReportSideBarIcone";
-import SuppliersSideBarIcone from "../../../Icones/SuppliersSideBarIcone";
-import OrdersSideBarIcone from "../../../Icones/OrdersSideBarIcone";
-import ListSideBarIcone from "../../../Icones/ListSideBarIcone";
+import {
+  HomeIcon,
+  InventoryIcon,
+  ManageStoreIcon,
+  OrdersIcon,
+  ReportIcon,
+  SuppliersIcon,
+} from "../../../Icones/SideBarIcons";
 import LockIcon from "@mui/icons-material/Lock";
 import ChangePassword from "../../AuthComponents/ChangePassword/ChangePassword";
 
@@ -176,13 +173,13 @@ export default function SideBar() {
           <MenuItem
             component={<Link to="/home/settings" />}
             icon={<SettingsOutlinedIcon />}
-            className={getMenuItemClassName("/settings")}
+            className={getMenuItemClassName("/home")}
           >
             Settings
           </MenuItem>
           <MenuItem
             component={<Link to="/login" />}
-            icon={<LogoutIcon />}
+            icon={<LogOutIcon />}
             onClick={() => {
               localStorage.removeItem("token");
               navigate("/login");
