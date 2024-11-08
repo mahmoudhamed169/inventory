@@ -9,8 +9,7 @@ import TableRow from "@mui/material/TableRow";
 import { HeaderTable } from "../../../Components/MasterComponnets/InventoryAndOrders/Text";
 import { Link } from "react-router-dom";
 import Pagination from "../../../Components/MasterComponnets/Pagination/Pagination";
-import AddOrderModal from "../../../Components/MasterComponnets/AddOrderModal/AddOrderModal";
-import DeleteOutlinedIcon from '@mui/icons-material/DeleteOutlined';
+import AddTransactionModal from "../../../Components/MasterComponnets/AddOrderModal/AddTransactionModal";
 export default function Orders() {
   const rows = Array.from({ length: 9 }, (_, index) => ({
     Products: `Product ${index + 1}`,
@@ -19,7 +18,7 @@ export default function Orders() {
     OrderId: 12 - index,
     ExpectedDelivery: "21/12/22",
     Status: "Confirmed",
-    Action : <DeleteOutlinedIcon/>
+    Action: <DeleteOutlinedIcon />,
   }));
 
   const cellStyle = {
@@ -48,7 +47,7 @@ export default function Orders() {
               paddingInline: "16px",
             }}
           >
-            <HeaderTable headerTable="Orders" />
+            <HeaderTable headerTable="Transactions" />
 
             {/* <Button
               type="submit"
@@ -65,7 +64,7 @@ export default function Orders() {
               Add Product
             </Button> */}
 
-            <AddOrderModal />
+            <AddTransactionModal />
           </Box>
           <TableContainer component={"table"}>
             <Table sx={{ minWidth: 660 }} aria-label="simple table">
@@ -113,8 +112,15 @@ export default function Orders() {
                     <TableCell align="left">{row.Quantity} Packets</TableCell>
                     <TableCell align="left">{row.OrderId}</TableCell>
                     <TableCell align="left">{row.ExpectedDelivery}</TableCell>
-                    <TableCell sx={{color:"#10A760"}} align="left">{row.Status}</TableCell>
-                    <TableCell align="left" sx={{color:"#DA3E33" ,cursor:"pointer"}}>{row.Action}</TableCell>
+                    <TableCell sx={{ color: "#10A760" }} align="left">
+                      {row.Status}
+                    </TableCell>
+                    <TableCell
+                      align="left"
+                      sx={{ color: "#DA3E33", cursor: "pointer" }}
+                    >
+                      {row.Action}
+                    </TableCell>
                   </TableRow>
                 ))}
               </TableBody>
