@@ -1,5 +1,5 @@
-import { Box, Typography } from '@mui/material'
-import NoDataImg from "../../../../../src/assets/images/image.png"
+import { Box } from '@mui/material'
+import NoDataImg from "../../../../src/assets/images/image.png"
 export default function NoData() {
   return (
     <>

@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@mui/material";
 import { ProductDataForBestSellingTable } from "../../../Interfaces/TableForReportsBestSellingTable/TableForReportsBestSellingTable";
-import NoData from "../../shared/ProtectedRoute/NoData/NoData";
+import NoData from "../../shared/NoData/NoData";
 
 function createData({
   Product,

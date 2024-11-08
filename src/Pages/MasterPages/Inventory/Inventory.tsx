@@ -21,7 +21,7 @@ import { HeaderTable } from "../../../Components/MasterComponnets/InventoryAndOr
 import { apiClient, PRODUCTS_URLS } from "../../../Api/EndPoints";
 import { useEffect, useState } from "react";
 import MenuItem from "@mui/material/MenuItem";
-import NoData from "../../../Components/shared/ProtectedRoute/NoData/NoData";
+import NoData from "../../../Components/shared/NoData/NoData";
 
 export default function Inventory() {
   const cellStyle = {
