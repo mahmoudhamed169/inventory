@@ -4,6 +4,7 @@ import Login from "./Pages/AuthPages/Login/Login";
 import Register from "./Pages/AuthPages/Register/Register";
 import ForgetPassword from "./Pages/AuthPages/ForgetPass/ForgetPassword";
 import ResetPassword from "./Pages/AuthPages/ResetPassword/ResetPassword";
+import ChangePassword from "./Components/AuthComponents/ChangePassword/ChangePassword";
 import { Toaster } from "react-hot-toast";
 import MasterLayout from "./Layouts/MasterLayout/MasterLayout";
 import Dashboard from "./Pages/MasterPages/Dashboard/Dashboard";

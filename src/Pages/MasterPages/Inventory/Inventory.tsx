@@ -177,8 +177,7 @@ export default function Inventory() {
                 </Box>
 
                 <AddProductModal />
-              </Box>
-            </Box>
+              </Box>          </Box>
           </Box>
 
           <TableContainer component={"table"}>
