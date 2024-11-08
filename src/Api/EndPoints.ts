@@ -17,7 +17,7 @@ export const AUTHENTICATION_URLS = {
   regitser: `${baseURL}/users/register`,
   login: `${baseURL}/users/login`,
   forgetPassword: `${baseURL}/users/forgetpassword`,
-  changePassword: `/users/change-password`,
+  changePassword: `${baseURL}/users/changepassword`,
   resetPassword: `${baseURL}/users/resetpassword`,
 };
 

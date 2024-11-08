@@ -32,3 +32,10 @@ export interface IResponse {
   message: string;
   errorCode: number;
 }
+
+export interface FormValuesChanePassword{
+  newPassword: String;
+  confirmPassword: String;
+  email: String;
+  oldPassword: String;
+}

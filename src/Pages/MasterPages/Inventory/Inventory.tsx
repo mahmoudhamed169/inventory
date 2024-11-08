@@ -123,7 +123,7 @@ export default function Inventory() {
                 <HeaderTable headerTable="Products" />
               </Box>
 
-              <Bo
+              <Box
                 sx={{
                   display: "flex",
                   gap: 2,
@@ -179,7 +179,7 @@ export default function Inventory() {
                 </Box>
 
                 <AddProductModal />
-              </Bo            </Box>
+              </Box>          </Box>
           </Box>
 
           <TableContainer component={"table"}>

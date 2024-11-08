@@ -4,6 +4,7 @@ import Login from "./Pages/AuthPages/Login/Login";
 import Register from "./Pages/AuthPages/Register/Register";
 import ForgetPassword from "./Pages/AuthPages/ForgetPass/ForgetPassword";
 import ResetPassword from "./Pages/AuthPages/ResetPassword/ResetPassword";
+import ChangePassword from "./Components/AuthComponents/ChangePassword/ChangePassword";
 import { Toaster } from "react-hot-toast";
 import MasterLayout from "./Layouts/MasterLayout/MasterLayout";
 import Dashboard from "./Pages/MasterPages/Dashboard/Dashboard";
@@ -41,13 +42,13 @@ export default function App() {
       children: [
         { index: true, element: <Dashboard /> },
         { path: "dashboard", element: <Dashboard /> },
-        { path: "inventory", element: <Inventory/> },
+        { path: "inventory", element: <Inventory /> },
         { path: "profuct-info", element: <ProductInfo /> },
         { path: "manage-store", element: <ManageStore /> },
         { path: "suppliers", element: <Suppliers /> },
         { path: "reports", element: <Reports /> },
         { path: "orders", element: <Orders /> },
-        
+       
       ],
     },
   ]);
