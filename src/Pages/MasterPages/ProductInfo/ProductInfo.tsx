@@ -1,21 +1,20 @@
-import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import EditIcon from "@mui/icons-material/Edit";
 import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
+import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useLocation } from "react-router-dom";
 import { PRODUCTS_URLS, apiClient } from "../../../Api/EndPoints";
 import TableForProductInfo from "../../../Components/MasterComponnets/TableForProductInfo/TableForProductInfo";
+import NavBreadcrumb from "../../../Components/shared/NavBreadcrumb/NavBreadcrumb";
 import { productInfoResponse } from "../../../Interfaces/ProductInfoResponse/ProductInfoResponse";
 import { RowData } from "../../../Interfaces/TableForProductInfo.interface/TableForProductInfo.interface";
 import Styles from "./ProductInfo.module.css";
-import { AxiosError } from "axios";
-import toast from "react-hot-toast";
 import { rows } from "./ProductInfoData";
 
 export default function ProductInfo() {
   const location = useLocation();
   const productId = location.state?.productId;
-  const navigate = useNavigate();
 
   const [listOfProductInfoData, setlLstOfProductInfoData] =
     useState<productInfoResponse | null>(null);
@@ -87,20 +86,6 @@ export default function ProductInfo() {
           borderRadius: "0.5rem",
         }}
       >
-        <Button
-          onClick={() => navigate(-1)}
-          sx={{
-            "&:hover": {
-              backgroundColor: "transparent",
-            },
-            fontSize: { xs: ".8rem", sm: ".9rem", md: "1rem" },
-            display: "flex",
-            justifyContent: "start",
-          }}
-        >
-          <ArrowBackIosIcon style={{ fontWeight: 300, fontSize: "16px" }} />
-          Back
-        </Button>
         {/* --------------- Header Section with Title and Action Buttons--------------- */}
         <Stack
           sx={{
@@ -123,7 +108,8 @@ export default function ProductInfo() {
                 fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
               }}
             >
-              Overiew
+              <NavBreadcrumb MainTitle="Inventory" title="Overiew" />
+              
             </Typography>
           </Box>
 
