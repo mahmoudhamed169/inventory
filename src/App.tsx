@@ -47,8 +47,7 @@ export default function App() {
         { path: "manage-store", element: <ManageStore /> },
         { path: "suppliers", element: <Suppliers /> },
         { path: "reports", element: <Reports /> },
-        { path: "orders", element: <Orders /> },
-       
+        { path: "transactions", element: <Orders /> },
       ],
     },
   ]);
