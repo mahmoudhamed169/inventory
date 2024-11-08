@@ -102,11 +102,11 @@ export default function SideBar() {
           Suppliers
         </MenuItem>
         <MenuItem
-          component={<Link to="/home/orders" />}
+          component={<Link to="/home/transactions" />}
           icon={<OrdersIcon />}
           className={getMenuItemClassName("/home/orders")}
         >
-          Orders
+          Transactions
         </MenuItem>
         <MenuItem
           component={<Link to="/home/manage-store" />}

@@ -41,13 +41,12 @@ export default function App() {
       children: [
         { index: true, element: <Dashboard /> },
         { path: "dashboard", element: <Dashboard /> },
-        { path: "inventory", element: <Inventory/> },
+        { path: "inventory", element: <Inventory /> },
         { path: "profuct-info", element: <ProductInfo /> },
         { path: "manage-store", element: <ManageStore /> },
         { path: "suppliers", element: <Suppliers /> },
         { path: "reports", element: <Reports /> },
-        { path: "orders", element: <Orders /> },
-        
+        { path: "transactions", element: <Orders /> },
       ],
     },
   ]);
