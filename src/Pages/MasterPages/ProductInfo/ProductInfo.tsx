@@ -3,7 +3,7 @@ import { Box, Button, Grid2, Stack, Typography } from "@mui/material";
 import { AxiosError } from "axios";
 import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { PRODUCTS_URLS, apiClient } from "../../../Api/EndPoints";
 import TableForProductInfo from "../../../Components/MasterComponnets/TableForProductInfo/TableForProductInfo";
 import NavBreadcrumb from "../../../Components/shared/NavBreadcrumb/NavBreadcrumb";
@@ -11,14 +11,24 @@ import { productInfoResponse } from "../../../Interfaces/ProductInfoResponse/Pro
 import { RowData } from "../../../Interfaces/TableForProductInfo.interface/TableForProductInfo.interface";
 import Styles from "./ProductInfo.module.css";
 import { rows } from "./ProductInfoData";
+import DeleteModal from "../../../Components/shared/DeleteModal/DeleteModal";
 
 export default function ProductInfo() {
+  // Retrieve the productId from Inventory
   const location = useLocation();
   const productId = location.state?.productId;
+  const navigate = useNavigate();
 
+  // Open and close handlers for the delete confirmation modal
+  const [openDeleteModal, setOpenDeleteModal] = useState(false);
+  const handleOpenDeleteModal = () => setOpenDeleteModal(true);
+  const handleCloseDeleteModal = () => setOpenDeleteModal(false);
+
+  // State to store product information data
   const [listOfProductInfoData, setlLstOfProductInfoData] =
     useState<productInfoResponse | null>(null);
 
+  // Fetch product information data based on productId
   const getProductInfoData = async () => {
     try {
       const response = await apiClient.get(
@@ -33,10 +43,27 @@ export default function ProductInfo() {
     }
   };
 
+  // Function to delete the product by ID
+  const DeleteProduct = async () => {
+    try {
+      await apiClient.delete(PRODUCTS_URLS.delete(productId));
+      toast.success("Deleted successfully.");
+      handleCloseDeleteModal();
+      navigate("/home/inventory");
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message: string }>;
+      const errorMessage =
+        axiosError.response?.data?.message ||
+        "Failed to delete the Product. Please try again.";
+      toast.error(errorMessage);
+    }
+  };
+
   useEffect(() => {
     getProductInfoData();
   }, []);
 
+  // Data for primary product information to be displayed in a table format
   const rowData: RowData[] = [
     {
       name: "Product name",
@@ -70,117 +97,133 @@ export default function ProductInfo() {
   ];
 
   return (
-    <Box
-      sx={{
-        backgroundColor: "#f0f1f3",
-        padding: { xs: "15px 20px", sm: "20px 25px", md: "22px 30px" },
-        gap: { xs: "10px", md: "15px" },
-        display: "flex",
-        flexDirection: "column",
-      }}
-    >
-      <Stack
+    <>
+      {/* --------------- Delete confirmation modal --------------- */}
+      <DeleteModal
+        open={openDeleteModal}
+        handleClose={handleCloseDeleteModal}
+        onSubmit={DeleteProduct}
+      />
+
+      {/* --------------- Main container styling for the page layout --------------- */}
+      <Box
         sx={{
-          backgroundColor: "#fff",
+          backgroundColor: "#f0f1f3",
           padding: { xs: "15px 20px", sm: "20px 25px", md: "22px 30px" },
-          borderRadius: "0.5rem",
+          gap: { xs: "10px", md: "15px" },
+          display: "flex",
+          flexDirection: "column",
         }}
       >
-        {/* --------------- Header Section with Title and Action Buttons--------------- */}
         <Stack
           sx={{
-            flexDirection: { xs: "column", md: "row" },
-            justifyContent: { xs: "center", md: "space-between" },
-            alignItems: "center",
-            gap: { xs: "10px", md: "0" },
-            paddingBottom: "1rem",
-            borderBottom: " 1px solid #F0F1F3",
+            backgroundColor: "#fff",
+            padding: { xs: "15px 20px", sm: "20px 25px", md: "22px 30px" },
+            borderRadius: "0.5rem",
           }}
-          component="div"
         >
-          {/* --------------- Title --------------- */}
+          {/* --------------- Header Section with Title and Action Buttons--------------- */}
+          <Stack
+            sx={{
+              flexDirection: { xs: "column", md: "row" },
+              justifyContent: { xs: "center", md: "space-between" },
+              alignItems: "center",
+              gap: { xs: "10px", md: "0" },
+              paddingBottom: "1rem",
+              borderBottom: " 1px solid #F0F1F3",
+            }}
+            component="div"
+          >
+            {/* --------------- Title --------------- */}
 
-          <Box component="div">
-            <Typography
-              variant="h5"
-              textAlign={{ xs: "center", md: "left" }}
-              sx={{
-                fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
-              }}
-            >
-              <NavBreadcrumb MainTitle="Inventory" title="Overiew" />
-              
-            </Typography>
-          </Box>
-
-          {/* --------------- Action Buttons --------------- */}
-          <Box sx={{ display: "flex", gap: { xs: "0.5rem", md: "0.75rem" } }}>
-            {["Edit", "Download"].map((label) => (
-              <Button
-                key={label}
+            <Box component="div">
+              <Typography
+                variant="h5"
+                textAlign={{ xs: "center", md: "left" }}
                 sx={{
-                  color: "#5D6679",
-                  borderColor: "#5D6679",
-                  fontSize: { xs: "0.75rem", sm: "1rem" },
+                  fontSize: { xs: "1.25rem", sm: "1.5rem", md: "1.75rem" },
                 }}
-                variant="outlined"
-                startIcon={label === "Edit" ? <EditIcon /> : null}
               >
-                {label}
+                <NavBreadcrumb MainTitle="Inventory" title="Overiew" />
+              </Typography>
+            </Box>
+
+            {/* --------------- Action Buttons --------------- */}
+            <Box sx={{ display: "flex", gap: { xs: "0.5rem", md: "0.75rem" } }}>
+              <Button
+                onClick={handleOpenDeleteModal}
+                variant="contained"
+                color="error"
+              >
+                Delete
               </Button>
-            ))}
+              {["Edit", "Download"].map((label) => (
+                <Button
+                  key={label}
+                  sx={{
+                    color: "#5D6679",
+                    borderColor: "#5D6679",
+                    fontSize: { xs: "0.75rem", sm: "1rem" },
+                  }}
+                  variant="outlined"
+                  startIcon={label === "Edit" ? <EditIcon /> : null}
+                >
+                  {label}
+                </Button>
+              ))}
+            </Box>
+          </Stack>
+
+          {/* --------------- Main container for product information layout --------------- */}
+          <Box sx={{ marginTop: "2rem" }}>
+            <Grid2 container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+              {/* --------------- Primary & Supplier Details --------------- */}
+              <Grid2 size={{ xs: 12, md: 8 }}>
+                <Stack spacing={1.5}>
+                  <TableForProductInfo title="Primary Details" rows={rowData} />
+                  <TableForProductInfo
+                    title="Supplier Details"
+                    rows={rows.rowName}
+                  />
+                </Stack>
+              </Grid2>
+
+              {/* --------------- Product Image & Stock Info --------------- */}
+              <Grid2 size={{ xs: 12, md: 4 }}>
+                <Box
+                  sx={{ textAlign: "center", marginY: { xs: "1.5rem", md: 0 } }}
+                >
+                  <img
+                    className={Styles["product-imge"]}
+                    src={listOfProductInfoData?.imageUrl}
+                    alt="product-imge"
+                  />
+                </Box>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <TableForProductInfo rows={rowData2} />
+                </Box>
+              </Grid2>
+
+              {/* --------------- Stock Locations --------------- */}
+              <Grid2 size={{ xs: 12, md: 8 }}>
+                <Stack>
+                  <TableForProductInfo
+                    title="Stock Locations"
+                    rows={rows.rowBranch}
+                    Stock={true}
+                  />
+                </Stack>
+              </Grid2>
+            </Grid2>
           </Box>
         </Stack>
-
-        {/* --------------- Main container for product information layout --------------- */}
-        <Box sx={{ marginTop: "2rem" }}>
-          <Grid2 container columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
-            {/* --------------- Primary & Supplier Details --------------- */}
-            <Grid2 size={{ xs: 12, md: 8 }}>
-              <Stack spacing={1.5}>
-                <TableForProductInfo title="Primary Details" rows={rowData} />
-                <TableForProductInfo
-                  title="Supplier Details"
-                  rows={rows.rowName}
-                />
-              </Stack>
-            </Grid2>
-
-            {/* --------------- Product Image & Stock Info --------------- */}
-            <Grid2 size={{ xs: 12, md: 4 }}>
-              <Box
-                sx={{ textAlign: "center", marginY: { xs: "1.5rem", md: 0 } }}
-              >
-                <img
-                  className={Styles["product-imge"]}
-                  src={listOfProductInfoData?.imageUrl}
-                  alt="product-imge"
-                />
-              </Box>
-
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: "center",
-                }}
-              >
-                <TableForProductInfo rows={rowData2} />
-              </Box>
-            </Grid2>
-
-            {/* --------------- Stock Locations --------------- */}
-            <Grid2 size={{ xs: 12, md: 8 }}>
-              <Stack>
-                <TableForProductInfo
-                  title="Stock Locations"
-                  rows={rows.rowBranch}
-                  Stock={true}
-                />
-              </Stack>
-            </Grid2>
-          </Grid2>
-        </Box>
-      </Stack>
-    </Box>
+      </Box>
+    </>
   );
 }
