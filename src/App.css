@@ -1,0 +1,46 @@
+.muiBarElement-root {
+    width: 40px !important;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+/* ---------------------- sidebar component ---------------------- */
+
+.sidebar-container {
+    .ps-sidebar-root {
+        transition: all 0.4s ease-in-out !important;
+    }
+
+    .ps-menu-button {
+        &:first-child:hover {
+            background-color: transparent !important;
+        }
+
+        &.active,
+        &:hover,
+        &:focus {
+            color: #1570EF;
+            background-color: #f3f3f3 !important;
+            border-radius: 15px;
+        }
+    }
+
+    .css-1t8x7v1>.ps-menu-button:hover,
+    .css-1t8x7v1>.ps-menu-button:focus {
+        background-color: #f3f3f3 !important;
+    }
+}
+
+react-hot-toast {
+    font-family: "Liberation Mono", "Courier New", monospace";
+
+        /* Change to your preferred font */
+}
+
+.react-hot-toast__toast {
+    font-family: sans-serif;
+}

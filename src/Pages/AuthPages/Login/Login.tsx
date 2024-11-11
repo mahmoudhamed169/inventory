@@ -1,26 +1,83 @@
-import { Box, FormControl, Stack, Typography } from "@mui/material";
-import logo from "../../../assets/Logo.png";
-import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { Box, Checkbox, FormControl, Stack, Typography } from "@mui/material";
 import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useContext, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import axios, { AxiosError } from "axios";
+import {
+  AuthResponse,
+  LoginRequest,
+  LoginResponse,
+} from "../../../Interfaces/Interfaces";
+import { AUTHENTICATION_URLS } from "../../../Api/EndPoints";
+
+import logo from "../../../assets/Logo.png";
 import { FormTextField } from "../../../Components/AuthComponents/FormTextField/FormTextField";
 import ButtonForm from "../../../Components/AuthComponents/ButtonForm/ButtonForm";
 import { PasswordTextField } from "../../../Components/AuthComponents/PasswordTextField/PasswordTextField";
+import GoogleSignInButton from "../../../Components/AuthComponents/GoogleSignInButton/GoogleSignInButton";
+import AuthHeader from "../../../Components/AuthComponents/AuthHeader/AuthHeader";
+import { AuthContext } from "../../../Context/AuthContext/AuthContext";
 
 export default function Login() {
+  const { saveUserData } = useContext(AuthContext);
   const {
     register,
     handleSubmit,
     setFocus,
-    formState: { errors, isSubmitting },
-  } = useForm();
+    formState: { errors },
+  } = useForm<LoginRequest>();
+  const navigate = useNavigate();
+
+  const [isLoginSubmitting, setIsLoginSubmitting] = useState(false);
+  const [isGoogleSubmitting, setIsGoogleSubmitting] = useState(false);
 
   useEffect(() => {
     setFocus("email");
   }, [setFocus]);
 
-  const onSubmit = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<LoginRequest> = async (data) => {
+    setIsLoginSubmitting(true);
+    const toastId = toast.loading("Processing...");
+
+    try {
+      const response = await axios.post<AuthResponse>(
+        AUTHENTICATION_URLS.login,
+        data
+      );
+
+      console.log(response);
+      if (response.data.isSuccess) {
+        localStorage.setItem("token", response.data.data);
+        saveUserData();
+        navigate("/home/dashboard");
+        toast.success("Login Successfully", {
+          id: toastId,
+        });
+      } else {
+        toast.error(response.data.message, {
+          id: toastId,
+        });
+      }
+    } catch (error) {
+      const axiosError = error as AxiosError<{ message: string }>;
+      const errorMessage =
+        axiosError.response?.data?.message || "An error occurred";
+      toast.error(errorMessage, { id: toastId });
+    } finally {
+      setIsLoginSubmitting(false);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    setIsGoogleSubmitting(true);
+
+    // Placeholder for Google sign-in logic
+    setTimeout(() => {
+      setIsGoogleSubmitting(false);
+      toast.success("Google Sign-In Successfully");
+    }, 2000); // Simulate async Google Sign-In process
   };
 
   return (
@@ -32,28 +89,12 @@ export default function Login() {
         gap: "30px",
       }}
     >
-      <Box sx={{ textAlign: "center" }} component={"div"}>
-        <img src={logo} alt="Logo" />
-        <Typography
-          variant="h4"
-          component="h2"
-          sx={{ fontWeight: "600", fontSize: "2rem", mt: "10px" }}
-        >
-          Welcome 👋
-        </Typography>
-        <Typography
-          variant="body1"
-          component="p"
-          sx={{ fontWeight: "300", mt: "10px", color: "#A2A1A8" }}
-        >
-          Please login here
-        </Typography>
-      </Box>
+      <AuthHeader title=" Welcome 👋" subTitle="Please login here" />
 
       <FormControl
         component={"form"}
         onSubmit={handleSubmit(onSubmit)}
-        sx={{ width: "100" }}
+        sx={{ width: "90%", mx: "auto" }}
       >
         <Stack spacing={3}>
           <Box>
@@ -86,9 +127,77 @@ export default function Login() {
             />
           </Box>
 
-          <ButtonForm name="Login" isSubmitting={isSubmitting} />
+          <Box>
+            <Stack
+              direction={{ xs: "column", md: "row" }}
+              justifyContent={"space-between"}
+              spacing={5}
+            >
+              <Box sx={{ display: "flex", alignItems: "center", gap: "8px" }}>
+                <Checkbox sx={{ width: "24px", height: "24px" }} />
+                <Typography
+                  component={"p"}
+                  variant="body1"
+                  sx={{
+                    fontFamily: "Lexend, sans-serif",
+                    color: "#16151C",
+                    fontWeight: "300",
+                  }}
+                >
+                  Remember Me
+                </Typography>
+              </Box>
+              <Box>
+                <Link
+                  to={"/forget-password"}
+                  style={{
+                    color: "#006EC4",
+                    textDecoration: "none",
+                    fontFamily: "Lexend, sans-serif",
+                  }}
+                >
+                  Forgot Password?
+                </Link>
+              </Box>
+            </Stack>
+          </Box>
+
+          <ButtonForm name="Login" isSubmitting={isLoginSubmitting} />
+          <GoogleSignInButton
+            isSubmitting={isGoogleSubmitting}
+            onClick={handleGoogleSignIn}
+          />
         </Stack>
       </FormControl>
+
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          gap: "5px",
+          alignItems: "center",
+        }}
+        component={"div"}
+      >
+        <Typography
+          variant="body1"
+          component="p"
+          sx={{ fontWeight: "300", color: "#A2A1A8" }}
+        >
+          Don’t have an account?
+        </Typography>
+        <Link
+          to={"/register"}
+          style={{
+            textDecoration: "none",
+            color: "#1366D9",
+            fontWeight: "300",
+            fontFamily: "Lexend, sans-serif",
+          }}
+        >
+          Sign up
+        </Link>
+      </Box>
     </Box>
   );
 }

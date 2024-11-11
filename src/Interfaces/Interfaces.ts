@@ -1,0 +1,41 @@
+export interface ForgetPasswordIn {
+  email: string;
+}
+
+export interface LoginRequest {
+  email: string;
+  password: string;
+}
+
+export interface AuthResponse {
+  isSuccess: boolean;
+  data: string;
+  message: string;
+  errorCode: number;
+}
+
+export interface ResetRequest {
+  newPassword: "string";
+  confirmPassword: "string";
+  email: "string";
+  otpCode: "string";
+}
+export interface RegisterRequest {
+  userName: string;
+  password: string;
+  confirmPassword: string;
+  email: string;
+}
+export interface IResponse {
+  isSuccess: boolean;
+  data: string;
+  message: string;
+  errorCode: number;
+}
+
+export interface FormValuesChanePassword{
+  newPassword: String;
+  confirmPassword: String;
+  email: String;
+  oldPassword: String;
+}
